@@ -90,8 +90,16 @@ export function isSupportedChain(chainId: number | null | undefined): chainId is
 
 export const POKEMON_CONTRACT = {
     
-    address: "0x495f947276749Ce646f68AC8c248420045cb7b5e",
-    abi: [ 
+    address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    abi: [
+        "function mintPokemon(uint16 _pokedex_id, string _nickname, string _img_encoded_sprite, string _ability1_name, string _ability2_name, uint16 _base_hp, uint16 _base_attack, uint16 _base_defense, uint16 _base_attack_sp, uint16 _base_defense_sp, uint16 _base_speed, uint16 _base_height, uint16 _base_weight)"
+    ]
+};
+
+
+/* 
+
+[ 
         "constructor(string symbol, string name)",
         "function transferFrom(address from, address to, uint value)",
         "function balanceOf(address owner) view returns (uint balance)",
@@ -103,4 +111,4 @@ export const POKEMON_CONTRACT = {
       
         "event PersonAdded(uint indexed id, tuple(string name, uint16 age) person)"
     ]
-};
+*/

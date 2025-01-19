@@ -4,7 +4,7 @@ export const getFilteredPokemonInfo = (json) => {
     let filteredData = {}
     filteredData = flatAndFilterNullSprites(json)
     filteredData.sprites = simplifyImageKeys(filteredData.sprites);
-    console.log(filteredData)
+    
     return filteredData;
 }
 

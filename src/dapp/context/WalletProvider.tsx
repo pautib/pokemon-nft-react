@@ -8,8 +8,7 @@ import { WalletContext } from "./WalletContext"
 import { EIP6963EventNames, LOCAL_STORAGE_KEYS, isSupportedChain, networkInfoMap } from "../config"
 
 
-// The WalletProvider component wraps all other components in the dapp, providing them with the
-// necessary data and functions related to wallets.
+// The WalletProvider component wraps all other components in the dapp, providing them with the necessary data and functions related to wallets.
 export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [wallets, setWallets] = useState<Record<string, EIP6963ProviderDetail>>({})
   const [selectedWalletRdns, setSelectedWalletRdns] = useState<string | null>(null)
@@ -28,7 +27,6 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     function onAnnouncement(event: EIP6963ProviderEvent) {
-      //console.log(event)
       setWallets(currentWallets => ({
         ...currentWallets,
         [event.detail.info.rdns]: event.detail
@@ -49,8 +47,6 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
 
     function onChainChanged(event: string) { // event is a string with the new chain id
-      //console.log(event)
-      //console.log("The wallets", wallets)
       
       if (selectedWalletRdns) {
         const wallet = wallets[selectedWalletRdns]
@@ -79,6 +75,42 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
   }, [selectedWalletRdns])
+
+
+  useEffect(() => {
+
+    function onAccountsChanged(event: string[]) { // event is a string array with the account as first element
+
+      if (selectedWalletRdns && selectedAccountByWalletRdns) {
+        const wallet = wallets[selectedWalletRdns]
+      
+        setSelectedAccountByWalletRdns((currentAccounts) => ({
+          ...currentAccounts,
+          [wallet.info.rdns]: event[0],
+        }));
+      
+      localStorage.setItem(LOCAL_STORAGE_KEYS.SELECTED_ACCOUNT_BY_WALLET_RDNS,
+        JSON.stringify({
+          ...selectedAccountByWalletRdns,
+          [wallet.info.rdns]: event[0],
+        })
+      )
+
+      }
+    }
+
+    if (selectedWalletRdns) {
+      wallets[selectedWalletRdns].provider.addListener("accountsChanged", onAccountsChanged)
+    }
+    
+    return () => {
+      if (selectedWalletRdns) {
+        wallets[selectedWalletRdns].provider.removeListener("accountsChanged", onAccountsChanged)
+      }
+    }
+
+  }, [selectedWalletRdns, selectedAccountByWalletRdns])
+
 
   const connectWallet = useCallback(async (walletRdns: string) => {
     try {

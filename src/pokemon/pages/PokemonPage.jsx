@@ -1,6 +1,6 @@
 import { useNavigate, useParams} from "react-router-dom";
 import { capitalize } from "lodash";
-import {PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage} from "../components";
+import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTPopupBody } from "../components";
 import { PopupButton } from "../../ui/";
 import { usePokemon } from "../hooks";
 import { useMemo } from "react";
@@ -45,7 +45,7 @@ export const PokemonPage = () => {
                         <li className="list-group-item">
                             <PokemonCryButton cryArray={ Object.values(pokemon.cries) } />
                             <PopupButton buttonTitle="Get NFT" style={ { buttonClassName: 'pokeNavWalletButton'} }>
-                                <PokemonCarousel imageJson={ pokemon.sprites } />
+                                <PokemonNFTPopupBody pokemon={ pokemon } />
                             </PopupButton>
                             <button className="btn m-2 pokeGoBackButton" onClick={ onNavigateBack }>
                                 Go Back

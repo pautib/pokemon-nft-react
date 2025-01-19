@@ -22,7 +22,6 @@ export const getNaturesArrayValues = async() => {
             });
     }
 
-    console.log(naturesArray);
     return naturesArray;
 }
 

@@ -15,7 +15,6 @@ export const usePokemon = (pokemonId = 0) => {
             .catch((e) => setError(e))
             .finally(() => {
                 setLoading(false);
-                console.log("Inside usePokemon UseEffect");
             });
     }, [pokemonId]);
 

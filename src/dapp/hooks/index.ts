@@ -1,2 +1,2 @@
 export * from './useWalletProvider.ts';
-export * from './useSmartContract.tsx'
+export * from './useSmartContract.ts';

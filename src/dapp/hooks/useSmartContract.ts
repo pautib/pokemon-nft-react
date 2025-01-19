@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { BrowserProvider, Contract, JsonRpcSigner, InterfaceAbi } from "ethers";
 import { useWalletProvider } from "./useWalletProvider";
 
@@ -14,26 +14,41 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
         if (selectedWallet) {
 
             const ethersProvider = new BrowserProvider(selectedWallet.provider);
-            ethersProvider.getSigner().then((newSigner) => { 
-                console.log(newSigner);
+            ethersProvider.getSigner().then((newSigner) => {
+                //console.log(newSigner);
                 setSigner(newSigner);
-            }).catch((e) => setError(e))
-            .finally(() => {
-                console.log("Signer set");
+            })
+            .catch((e) => setError(e))
+            .then(() => {
+                //console.log("Signer set");
                 const theContract = new Contract(contractAddress, contractAbi, signer);
-                console.log(theContract);
-                console.log(theContract.getAddress());
-                console.log(theContract.getDeployedCode);
-                console.log(theContract.target);
                 setContract(theContract);
-                
-            } );
+            } )
+            .catch((e) => setError(e))
+            .finally(() => {
+                //console.log("I am the signer", signer);
+                //console.log("Contract set");
+                //console.log(contract);
+                //console.log(contract?.getAddress());
+                //console.log(contract?.getDeployedCode);
+                //console.log(contract?.target);
+                //console.log(contract?.interface);
+                //console.log(contract?.runner);
+            });
 
+        }
+
+        if (signer) {
+            console.log("I am the real signer", signer);
+        }
+
+        if (contract) {
+            console.log("I am the real contract", contract);
         }
 
     }, [selectedWallet]);
 
-    return { 
+    return {
         contract,
         signer,
         error,
