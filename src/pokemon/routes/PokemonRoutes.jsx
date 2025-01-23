@@ -11,12 +11,10 @@ export const PokemonRoutes = () => {
 
             <div className="container">
                 <Routes>
-                    <Route path= {BASE_URI}>
-                        <Route path= {BASE_URI + "/"} element={<Navigate to="search" />} />
-                        <Route path="search" element={<SearchPokemonPage />} />
-                        <Route path="pokemon/:pokemonId" element={<PokemonPage />} />
-                        <Route path="wallet-test" element={<DApp />} />
-                    </Route>
+                    <Route path = {BASE_URI + "/"} element={<Navigate to="search" />} />
+                    <Route path = {BASE_URI + "/search" } element={<SearchPokemonPage />} />
+                    <Route path = {BASE_URI + "/pokemon/:pokemonId"} element={<PokemonPage />} />
+                    <Route path = {BASE_URI + "/wallet-test"} element={<DApp />} />
                 </Routes>
             </div>
         </>
