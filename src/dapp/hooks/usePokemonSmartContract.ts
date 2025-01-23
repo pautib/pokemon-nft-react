@@ -5,12 +5,11 @@ import { Pokemon } from '../config';
 
 export const usePokemonSmartContract = (pokemonContractAddress: string, pokemonContractAbi: InterfaceAbi) => {
 
-    const {contract: pokemonContract, contractError } = useSmartContract(pokemonContractAddress, pokemonContractAbi);
+    const {contract: pokemonContract, contractError, setContractError } = useSmartContract(pokemonContractAddress, pokemonContractAbi);
     const [isContractLoaded, setIsContractLoaded] = useState(false);
 
     useEffect(() => {
-      console.log(pokemonContract)
-      
+
       const listener = (tokenId: number, nickname: string, personalityValue: number) => {
         console.log("New Pokemon NFT minted:", tokenId, nickname, personalityValue);
       };
@@ -71,9 +70,11 @@ export const usePokemonSmartContract = (pokemonContractAddress: string, pokemonC
           })
           .catch((error) => {
             console.error("Error minting Pokemon NFT:", error);
+            setContractError(error.message);
           });
           
         } else {
+          setContractError("Contract or signer is not available");
           console.error("Contract or signer is not available");
         }
     

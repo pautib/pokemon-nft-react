@@ -33,6 +33,7 @@ export const PokemonNFTCreationForm = ({ pokemon, encodedImg }) => {
             </>
             : 
             <>
+              <span>Connect to Sepolia Testnet to buy this Pokemon NFT</span>
             </>
           }
 

@@ -18,6 +18,15 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
         setContractError(initErrorMessage);
     }
 
+    const checkContractDeployment = async (contract: Contract) => {
+        try {
+            await contract.deployed();
+            return true;
+        } catch (error) {
+            return false;
+        }
+    };
+
     useEffect(() => {
 
         clearContractStates();
@@ -31,11 +40,20 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
 
                 const theContract = new Contract(contractAddress, contractAbi, newSigner);
                 setContract(theContract);
-                clearError();
+                return checkContractDeployment(theContract);
+
+            }).then((isDeployed) => {
+                if (isDeployed) {
+                    clearError();
+                } else {
+                    setContract(null);
+                    setContractError("Contract is not deployed on the selected network.");
+                    //throw new Error("Contract is not deployed on the selected network.");
+                }
             })
             .catch((e) => {
                 setContractError(e);
-                console.error(e);    
+                console.error(e);
             });
         }
 
@@ -45,6 +63,7 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
         contract,
         signer,
         contractError,
+        setContractError
     };
 
 }
