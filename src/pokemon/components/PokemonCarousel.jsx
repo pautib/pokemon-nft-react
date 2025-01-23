@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import {useCarouselCounter} from "../hooks/useCarouselCounter.js";
 
 export const PokemonCarousel = ({
-    imageJson
+    imageJson, 
+    onSelectImg = () => {}
 }) => {
 
     const [footerImgText, setFooterImgText] = useState('');
@@ -14,6 +15,7 @@ export const PokemonCarousel = ({
     useEffect(() => {
         let footer = Object.entries(imageJson)?.at(activeImgIndex)[0];
         setFooterImgText(customizeFooterText(footer));
+        onSelectImg(activeImgIndex);
     }, [activeImgIndex]);
 
     function customizeFooterText(imgName) {
@@ -30,6 +32,7 @@ export const PokemonCarousel = ({
                                  key={ keyName }
                                  id={ keyName } >
                                 <img
+                                    id={ `carousel-img ${keyName} ${activeImgIndex === index ? "active" : ""}`  }
                                     src={ imgUrl }
                                     className="img-thumbnail img-fluid animate__animated animate__fadeInLeft"
                                     style={{backgroundSize: "cover",  width: "100vw", maxWidth: "100%" }}
@@ -60,5 +63,6 @@ export const PokemonCarousel = ({
 }
 
 PokemonCarousel.propTypes = {
-    imageJson: PropTypes.object
+    imageJson: PropTypes.object,
+    onSelectImg: PropTypes.func
 };

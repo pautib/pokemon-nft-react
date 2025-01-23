@@ -5,6 +5,7 @@ import {
     useState,
 } from "react"
 import { WalletContext } from "./WalletContext"
+import { EIP6963ProviderDetail, SelectedAccountByWallet, EIP6963ProviderEvent, WalletError, WalletProviderContext} from "../config"
 import { EIP6963EventNames, LOCAL_STORAGE_KEYS, isSupportedChain, networkInfoMap } from "../config"
 
 
@@ -14,7 +15,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [selectedWalletRdns, setSelectedWalletRdns] = useState<string | null>(null)
   const [selectedAccountByWalletRdns, setSelectedAccountByWalletRdns] = useState<SelectedAccountByWallet>({})
 
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("Wallet is not connected")
   const clearError = () => setErrorMessage("")
   const setError = (error: string) => setErrorMessage(error)
 
@@ -35,6 +36,8 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
       if (savedSelectedWalletRdns && event.detail.info.rdns === savedSelectedWalletRdns) {
         setSelectedWalletRdns(savedSelectedWalletRdns)
       }
+
+      clearError();
     }
 
     window.addEventListener(EIP6963EventNames.Announce, onAnnouncement)
@@ -61,6 +64,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
             }
         }}))
 
+        clearError();
       }
     }
 
@@ -89,12 +93,14 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
           [wallet.info.rdns]: event[0],
         }));
       
-      localStorage.setItem(LOCAL_STORAGE_KEYS.SELECTED_ACCOUNT_BY_WALLET_RDNS,
-        JSON.stringify({
-          ...selectedAccountByWalletRdns,
-          [wallet.info.rdns]: event[0],
-        })
-      )
+        localStorage.setItem(LOCAL_STORAGE_KEYS.SELECTED_ACCOUNT_BY_WALLET_RDNS,
+          JSON.stringify({
+            ...selectedAccountByWalletRdns,
+            [wallet.info.rdns]: event[0],
+          })
+        )
+
+        clearError();
 
       }
     }
@@ -133,6 +139,9 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
             [wallet.info.rdns]: accounts[0],
           })
         )
+
+        clearError();
+
       }
     } catch (error) {
       console.error("Failed to connect to provider:", error)
@@ -144,6 +153,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const disconnectWallet = useCallback(async () => {
 
     if (selectedWalletRdns) {
+      
       setSelectedAccountByWalletRdns((currentAccounts) => ({
         ...currentAccounts,
         [selectedWalletRdns]: null,
@@ -154,15 +164,20 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
       localStorage.removeItem(LOCAL_STORAGE_KEYS.SELECTED_WALLET_RDNS)
   
       try {
+        
         await wallet.provider.request({
           method: "wallet_revokePermissions",
           params: [{ eth_accounts: {} }],
         })
+
+        clearError();
+
       } catch (error) {
         console.error("Failed to revoke permissions:", error)
         const walletError: WalletError = error as WalletError
         setError(`Code: ${walletError.code} \nError Message: ${walletError.message}`)
       }
+
     }
   }, [selectedWalletRdns, wallets])
 
@@ -175,12 +190,15 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     if (selectedWalletRdns) {
+
       const wallet = wallets[selectedWalletRdns]
       try {
         await wallet.provider.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: `0x${chain.toString(16)}` }],
         });
+
+        clearError();
         // chainChanged event will be triggered
       } catch (error: any) {
         if (error.code === 4902 || error.code === -32603) {
@@ -208,10 +226,10 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
     selectedWallet: selectedWalletRdns === null ? null : wallets[selectedWalletRdns],
     selectedAccount: selectedWalletRdns === null ? null : selectedAccountByWalletRdns[selectedWalletRdns],
     errorMessage,
+    clearError,
     connectWallet,
     disconnectWallet,
     switchChain,
-    clearError
   }
   
   return (

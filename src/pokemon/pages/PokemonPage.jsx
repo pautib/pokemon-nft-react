@@ -1,9 +1,9 @@
+import { useCallback, useMemo, useRef, useEffect } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { capitalize } from "lodash";
-import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTPopupBody } from "../components";
-import { PopupButton } from "../../ui/";
+import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
 import { usePokemon } from "../hooks";
-import { useMemo } from "react";
+import { getBase64EncodedImg } from "../helpers";
 
 
 export const PokemonPage = () => {
@@ -12,26 +12,42 @@ export const PokemonPage = () => {
     const { pokemonId, ...rest } = useParams();
     const {loading, ...mappedPokemon} = usePokemon(pokemonId);
     const pokemon = useMemo(() => mappedPokemon, [mappedPokemon]);
+    const pickedEncodedImg = useRef(null);
 
     const navigate = useNavigate();
 
-    const onNavigateBack = () => {
+    const onNavigateBack = useCallback(() => {
         navigate(-1);
-    }
+    }, [navigate]);
+
+    const onSelectCarouselImg = useCallback((selectedIndex) => {
+
+        if (!loading) {
+            if (Object.entries(pokemon.sprites).length === 0) return;
+        
+            getBase64EncodedImg(Object.values(pokemon.sprites)[selectedIndex]).then((img) => {  
+              pickedEncodedImg.current = img;
+            });
+        }
+
+    }, [loading, pokemon]);
+
+    useEffect(() => {
+        onSelectCarouselImg(0);
+    }, [onSelectCarouselImg]);
 
     return (
         loading ? (
             <PokeballSpinner/>
         ) : (
 
-        <div className="container-fluid">
+        <div className="container-fluid ml-1">
 
             <div className="row mt-1">
 
-                <PokemonCarousel imageJson={ pokemon.sprites } />
+                <PokemonCarousel imageJson={ pokemon.sprites } onSelectImg={ onSelectCarouselImg }/>
 
                 <div className="col-xs-8 col-sm-8 col-md-8">
-                    <h3>{ capitalize(pokemon.name) }</h3>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item"> <b>Id: </b> { pokemon.id } </li>
                         <li className="list-group-item"> <b>Name: </b> { capitalize(pokemon.name) } </li>
@@ -44,12 +60,12 @@ export const PokemonPage = () => {
                         <li className="list-group-item"> <b>Abilities: </b> { pokemon.abilities.map(abilityNames => capitalize(abilityNames) + "").join(", ") }</li>
                         <li className="list-group-item">
                             <PokemonCryButton cryArray={ Object.values(pokemon.cries) } />
-                            <PopupButton buttonTitle="Get NFT" style={ { buttonClassName: 'pokeNavWalletButton'} }>
-                                <PokemonNFTPopupBody pokemon={ pokemon } />
-                            </PopupButton>
                             <button className="btn m-2 pokeGoBackButton" onClick={ onNavigateBack }>
                                 Go Back
                             </button>
+                        </li>
+                        <li className="list-group-item">
+                            <PokemonNFTCreationForm pokemon={ pokemon } />
                         </li>
                     </ul>
                     <br/>

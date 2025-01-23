@@ -27,7 +27,7 @@ export const PopupButton = ({buttonTitle, children, style}) => {
   style.buttonClassName ??= '';
 
   return (
-    <div>
+    <div className="flex-container">
         <Button aria-describedby={id} type="button" ref={reference} onClick={handleClick} className={style.buttonClassName + `${open ? " active" : ""}` }>
             { buttonTitle }
         </Button>

@@ -1,5 +1,6 @@
 import "./DApp.css"
-import { useWalletProvider } from '../hooks/useWalletProvider'
+import { useWalletProvider } from '../hooks'
+import { EIP6963ProviderDetail } from "../config";
 
 export const WalletList = () => {
   
