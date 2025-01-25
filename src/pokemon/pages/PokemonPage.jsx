@@ -12,7 +12,7 @@ export const PokemonPage = () => {
     const { pokemonId, ...rest } = useParams();
     const {loading, ...mappedPokemon} = usePokemon(pokemonId);
     const pokemon = useMemo(() => mappedPokemon, [mappedPokemon]);
-    const pickedEncodedImg = useRef(null);
+    const pickedEncodedImg = useRef("");
 
     const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ export const PokemonPage = () => {
                             </button>
                         </li>
                         <li className="list-group-item">
-                            <PokemonNFTCreationForm pokemon={ pokemon } />
+                            <PokemonNFTCreationForm pokemon={ pokemon } encodedImg={ pickedEncodedImg.current } />
                         </li>
                     </ul>
                     <br/>

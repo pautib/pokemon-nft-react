@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import { BrowserProvider, Contract, JsonRpcSigner, InterfaceAbi } from "ethers";
+import { BrowserProvider, Contract, JsonRpcSigner, InterfaceAbi, BaseContract } from "ethers";
 import { useWalletProvider } from "./useWalletProvider";
 
-export const useSmartContract = (contractAddress: string, contractAbi: InterfaceAbi) => {
+export const useSmartContract = <T extends Contract | BaseContract>(contractAddress: string, contractAbi: InterfaceAbi) => {
     const initErrorMessage = "Please connect your wallet";
 
     const { selectedWallet } = useWalletProvider();
     const [signer, setSigner] = useState<JsonRpcSigner | null>(null);
-    const [contract, setContract] = useState<Contract | null>(null);
+    const [contract, setContract] = useState<T | null>(null);
     const [contractError, setContractError] = useState<string | null>(initErrorMessage);
 
     const clearError = () => setContractError("")
@@ -19,10 +19,12 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
     }
 
     const checkContractDeployment = async (contract: Contract) => {
+        console.log("Checking contract deployment...");
         try {
-            await contract.deployed();
+            await contract.waitForDeployment();
             return true;
         } catch (error) {
+            console.log(error);
             return false;
         }
     };
@@ -39,15 +41,18 @@ export const useSmartContract = (contractAddress: string, contractAbi: Interface
                 setSigner(newSigner);
 
                 const theContract = new Contract(contractAddress, contractAbi, newSigner);
-                setContract(theContract);
+                setContract(theContract as T);
+                console.log(theContract)
                 return checkContractDeployment(theContract);
 
             }).then((isDeployed) => {
                 if (isDeployed) {
+                    console.log("Contract is deployed on the selected network.");
                     clearError();
                 } else {
                     setContract(null);
                     setContractError("Contract is not deployed on the selected network.");
+                    console.log("Contract is not deployed on the selected network.");
                     //throw new Error("Contract is not deployed on the selected network.");
                 }
             })

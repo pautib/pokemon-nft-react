@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { InterfaceAbi } from 'ethers';
 import { useSmartContract } from './useSmartContract';
-import { Pokemon } from '../config';
+import { Pokemon, PokemonContract } from '../config';
 
 export const usePokemonSmartContract = (pokemonContractAddress: string, pokemonContractAbi: InterfaceAbi) => {
 
-    const {contract: pokemonContract, contractError, setContractError } = useSmartContract(pokemonContractAddress, pokemonContractAbi);
+    const {contract: pokemonContract, contractError, setContractError } = useSmartContract<PokemonContract>(pokemonContractAddress, pokemonContractAbi);
     const [isContractLoaded, setIsContractLoaded] = useState(false);
 
     useEffect(() => {
@@ -16,7 +16,6 @@ export const usePokemonSmartContract = (pokemonContractAddress: string, pokemonC
   
       if (pokemonContract) {
         pokemonContract.addListener("NewPokemon", listener);
-        console.log('Here')
         setIsContractLoaded(true);
       }
   
@@ -40,13 +39,13 @@ export const usePokemonSmartContract = (pokemonContractAddress: string, pokemonC
         }
         
         if (pokemonContract) {
-    
+          console.log(pokemonContract)
           console.log("Contract and signer are available");
           console.log("Pokemon data:", pokemon);
           console.log("Pokemon nickname:", nickName);
           console.log("Encoded image:", encodedImg);
           
-          await pokemonContract.mintPokemon(
+          pokemonContract.mintPokemon(
             pokemon.id, 
             nickName, 
             encodedImg, 
