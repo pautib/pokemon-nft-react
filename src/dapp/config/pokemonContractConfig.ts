@@ -1,17 +1,13 @@
 import { BaseContract, TransactionResponse } from 'ethers';
-import { ContractInterface } from 'ethers';
-import { Contract, Signer, Provider } from 'ethers';
+import * as abiFile from './abi.json';
+
 export const POKEMON_CONTRACT = {
     deployedNetwork: 11155111,
 
     address: "0x0d36C08548B86d8B95C1A8bcB00Ba6960A6cBbe6",
 
-    abi: [
-        "function mintPokemon(uint16 _pokedex_id, string _nickname, string _img_encoded_sprite, string _ability1_name, string _ability2_name, uint16 _base_hp, uint16 _base_attack, uint16 _base_defense, uint16 _base_attack_sp, uint16 _base_defense_sp, uint16 _base_speed, uint16 _base_height, uint16 _base_weight)",
-        "event NewPokemon(uint256 indexed _id, string _nickname, uint32 _personalityValue)"
-    ]
-};
-
+    abi: JSON.stringify(abiFile.abi)
+}
 export interface Pokemon {
     id: number;
     name: string;
