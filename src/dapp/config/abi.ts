@@ -1,43 +1,6 @@
-{
-    "abi": [
-            
-        {
-            "type": "function",
-            "name": "approve",
-            "inputs": [
-                {
-                    "name": "",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "_tokenId",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "balanceOf",
-            "inputs": [
-                {
-                    "name": "_owner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "stateMutability": "view"
-        },
+import { Interface } from "ethers";
+
+export const ABI =  new Interface ([
         {
             "type": "function",
             "name": "burnPokemon",
@@ -68,104 +31,6 @@
             ],
             "outputs": [],
             "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "createRandomPokemon",
-            "inputs": [
-                {
-                    "name": "_pokedex_id",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_nickname",
-                    "type": "string",
-                    "internalType": "string"
-                },
-                {
-                    "name": "_img_encoded_sprite",
-                    "type": "string",
-                    "internalType": "string"
-                },
-                {
-                    "name": "_ability1_name",
-                    "type": "string",
-                    "internalType": "string"
-                },
-                {
-                    "name": "_ability2_name",
-                    "type": "string",
-                    "internalType": "string"
-                },
-                {
-                    "name": "_base_hp",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_attack",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_defense",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_attack_sp",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_defense_sp",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_speed",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_height",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_base_weight",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "getApproved",
-            "inputs": [
-                {
-                    "name": "_tokenId",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "stateMutability": "view"
         },
         {
             "type": "function",
@@ -373,30 +238,6 @@
         },
         {
             "type": "function",
-            "name": "isApprovedForAll",
-            "inputs": [
-                {
-                    "name": "_owner",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "_operator",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "bool",
-                    "internalType": "bool"
-                }
-            ],
-            "stateMutability": "pure"
-        },
-        {
-            "type": "function",
             "name": "levelUp",
             "inputs": [
                 {
@@ -523,19 +364,6 @@
                 }
             ],
             "stateMutability": "pure"
-        },
-        {
-            "type": "function",
-            "name": "owner",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "stateMutability": "view"
         },
         {
             "type": "function",
@@ -734,56 +562,6 @@
         },
         {
             "type": "event",
-            "name": "Approval",
-            "inputs": [
-                {
-                    "name": "owner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "approved",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "tokenId",
-                    "type": "uint256",
-                    "indexed": true,
-                    "internalType": "uint256"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
-            "name": "ApprovalForAll",
-            "inputs": [
-                {
-                    "name": "owner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "operator",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "approved",
-                    "type": "bool",
-                    "indexed": false,
-                    "internalType": "bool"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
             "name": "NewPokemon",
             "inputs": [
                 {
@@ -853,131 +631,6 @@
         },
         {
             "type": "error",
-            "name": "ERC721IncorrectOwner",
-            "inputs": [
-                {
-                    "name": "sender",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "tokenId",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                },
-                {
-                    "name": "owner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InsufficientApproval",
-            "inputs": [
-                {
-                    "name": "operator",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "tokenId",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InvalidApprover",
-            "inputs": [
-                {
-                    "name": "approver",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InvalidOperator",
-            "inputs": [
-                {
-                    "name": "operator",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InvalidOwner",
-            "inputs": [
-                {
-                    "name": "owner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InvalidReceiver",
-            "inputs": [
-                {
-                    "name": "receiver",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721InvalidSender",
-            "inputs": [
-                {
-                    "name": "sender",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "ERC721NonexistentToken",
-            "inputs": [
-                {
-                    "name": "tokenId",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "OwnableInvalidOwner",
-            "inputs": [
-                {
-                    "name": "owner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
-            "name": "OwnableUnauthorizedAccount",
-            "inputs": [
-                {
-                    "name": "account",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ]
-        },
-        {
-            "type": "error",
             "name": "PokemonApprovalNotAllowed",
             "inputs": [
                 {
@@ -1040,5 +693,4 @@
                 }
             ]
         }
-    ]
-}
+]);
