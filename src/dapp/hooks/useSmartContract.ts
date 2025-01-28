@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { BrowserProvider, Contract, JsonRpcSigner, InterfaceAbi, BaseContract } from "ethers";
+import { BrowserProvider, Contract, JsonRpcSigner, InterfaceAbi, BaseContract, ContractInterface } from "ethers";
 import { useWalletProvider } from "./useWalletProvider";
 
-export const useSmartContract = <T extends Contract | BaseContract>(contractAddress: string, contractAbi: InterfaceAbi) => {
+
+export const useSmartContract = <T extends Contract | BaseContract | ContractInterface>(contractAddress: string, contractAbi: InterfaceAbi) => {
     const initErrorMessage = "Please connect your wallet";
 
     const { selectedWallet } = useWalletProvider();
@@ -42,7 +43,6 @@ export const useSmartContract = <T extends Contract | BaseContract>(contractAddr
 
                 const theContract = new Contract(contractAddress, contractAbi, newSigner);
                 setContract(theContract as T);
-                console.log(theContract)
                 return checkContractDeployment(theContract);
 
             }).then((isDeployed) => {
