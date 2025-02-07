@@ -33,7 +33,7 @@ export interface EIP1193Provider {
     path?: string
     sendAsync?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
     send?: (request: { method: string, params?: Array<unknown> }, callback: (error: Error | null, response: unknown) => void) => void
-    request: (request: { method: string, params?: Array<unknown> }) => Promise<unknown>
+    request(request: { method: string, params?: Array<any> | Record<string, any> }): Promise<any>
     addListener(eventName: string | symbol, listener: (...args: any[]) => void): this;
     removeListener(eventName: string | symbol, listener: (...args: any[]) => void): this;
   }

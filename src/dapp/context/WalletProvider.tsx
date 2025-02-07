@@ -5,7 +5,7 @@ import {
     useState,
 } from "react"
 import { WalletContext } from "./WalletContext"
-import { EIP6963ProviderDetail, SelectedAccountByWallet, EIP6963ProviderEvent, WalletError, WalletProviderContext} from "../config"
+import { EIP6963ProviderDetail, EIP6963ProviderInfo, SelectedAccountByWallet, EIP6963ProviderEvent, WalletError, WalletProviderContext} from "../config"
 import { EIP6963EventNames, LOCAL_STORAGE_KEYS, isSupportedChain, networkInfoMap } from "../config"
 
 
@@ -118,7 +118,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, [selectedWalletRdns, selectedAccountByWalletRdns])
 
 
-  const connectWallet = useCallback(async (walletRdns: string) => {
+  const connectWallet = useCallback(async (walletRdns: EIP6963ProviderInfo['rdns']) => {
     try {
       const wallet = wallets[walletRdns]
       const accounts = (await wallet.provider.request({

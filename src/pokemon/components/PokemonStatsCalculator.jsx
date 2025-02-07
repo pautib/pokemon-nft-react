@@ -62,8 +62,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 <h4 className="mt-2">IVs</h4>
 
                 <div className="col-xs-2 col-sm-2 col-md-2" >
-                    <IVInputNumber id="iv_hp" value={ivArray[0]} labelContent={"HP: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_hp" value={ ivArray[0] } labelContent={"HP: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[0] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -72,8 +72,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <IVInputNumber id="iv_atk" value={ivArray[1]} labelContent={"Atk: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_atk" value={ ivArray[1] } labelContent={"Atk: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[1] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -82,8 +82,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <IVInputNumber id="iv_def" value={ivArray[2]} labelContent={"Def: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_def" value={ ivArray[2] } labelContent={"Def: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[2] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -92,8 +92,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <IVInputNumber id="iv_atksp" value={ivArray[3]} labelContent={"AtkSp: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_atksp" value={ ivArray[3] } labelContent={"AtkSp: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[3] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -102,8 +102,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <IVInputNumber id="iv_defsp" value={ivArray[4]} labelContent={"DefSp: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_defsp" value={ ivArray[4] } labelContent={"DefSp: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[4] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -112,8 +112,8 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <IVInputNumber id="iv_speed" value={ivArray[5]} labelContent={"Speed: "}
-                       onChangeFunction={(event) => {
+                    <IVInputNumber id="iv_speed" value={ ivArray[5] } labelContent={"Speed: "}
+                       onChangeFunction={ (event) => {
                            const newIvs = [...ivArray];
                            newIvs[5] = event.target.valueAsNumber;
                            setIvArray(newIvs);
@@ -127,10 +127,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 <h4 className="mt-2">EVs</h4>
 
                 <div className="col-xs-2 col-sm-2 col-md-2" >
-                    <EVInputNumber id="ev_hp" value={evArray[0]}
+                    <EVInputNumber id="ev_hp" value={ evArray[0] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"Hp: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[0] = event.target.valueAsNumber;
                            setEvArray(newEvs);
@@ -139,10 +139,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <EVInputNumber id="ev_atk" value={evArray[1]}
+                    <EVInputNumber id="ev_atk" value={ evArray[1] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"Atk: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[1] = event.target.valueAsNumber;
                            setEvArray(newEvs);
@@ -151,10 +151,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <EVInputNumber id="ev_def" value={evArray[2]}
+                    <EVInputNumber id="ev_def" value={ evArray[2] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"Def: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[2] = event.target.valueAsNumber;
                            setEvArray(newEvs);
@@ -163,10 +163,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <EVInputNumber id="ev_atksp" value={evArray[3]}
+                    <EVInputNumber id="ev_atksp" value={ evArray[3] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"AtkSp: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[3] = event.target.valueAsNumber;
                            setEvArray(newEvs);
@@ -175,10 +175,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <EVInputNumber id="ev_defsp" value={evArray[4]}
+                    <EVInputNumber id="ev_defsp" value={ evArray[4] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"DefSp: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[4] = event.target.valueAsNumber;
                            setEvArray(newEvs);
@@ -187,10 +187,10 @@ export const PokemonStatsCalculator = ({ baseStats, pokemonName }) => {
                 </div>
 
                 <div className="col-xs-2 col-sm-2 col-md-2">
-                    <EVInputNumber id="ev_speed" value={evArray[5]}
+                    <EVInputNumber id="ev_speed" value={ evArray[5] }
                        addedMaxValue={ evArray[0] + evArray[1] + evArray[2] + evArray[3] + evArray[4] + evArray[5] }
                        labelContent={"Speed: "}
-                       onChangeFunction={(event) => {
+                       onChangeFunction={ (event) => {
                            const newEvs = [...evArray];
                            newEvs[5] = event.target.valueAsNumber;
                            setEvArray(newEvs);

@@ -3,7 +3,6 @@ import { useNavigate, useParams} from "react-router-dom";
 import { capitalize } from "lodash";
 import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
 import { usePokemon } from "../hooks";
-import { getBase64EncodedImg } from "../helpers";
 
 
 export const PokemonPage = () => {
@@ -12,7 +11,7 @@ export const PokemonPage = () => {
     const { pokemonId, ...rest } = useParams();
     const {loading, ...mappedPokemon} = usePokemon(pokemonId);
     const pokemon = useMemo(() => mappedPokemon, [mappedPokemon]);
-    const [ pickedEncodedImg, setPickedEncodedImg ] = useState(null);
+    const [ pickedImg, setPickedImg ] = useState(null);
 
     const navigate = useNavigate();
 
@@ -20,21 +19,25 @@ export const PokemonPage = () => {
         navigate(-1);
     };
 
+    useEffect(() => {
+        onSelectCarouselImg(0);
+    }, [loading]);
+
     const onSelectCarouselImg = (selectedIndex) => {
 
         if (!loading) {
             if (Object.entries(pokemon.sprites).length === 0) return;
-        
+   
+            setPickedImg(Object.values(pokemon.sprites)[selectedIndex]);
+            /** 
             getBase64EncodedImg(Object.values(pokemon.sprites)[selectedIndex]).then((img) => {  
-                setPickedEncodedImg(img);
+                setPickedImg(img);
             });
+            */
         }
 
     };
 
-    useEffect(() => {
-        onSelectCarouselImg(0);
-    }, [loading]);
 
     return (
         loading ? (
@@ -65,7 +68,7 @@ export const PokemonPage = () => {
                             </button>
                         </li>
                         <li className="list-group-item">
-                            <PokemonNFTCreationForm pokemon={ {...pokemon} } encodedImg={ pickedEncodedImg } />
+                            <PokemonNFTCreationForm pokemon={ {...pokemon} } imgUrl={ pickedImg } />
                         </li>
                     </ul>
                     <br/>

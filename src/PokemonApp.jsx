@@ -1,10 +1,13 @@
-import { WalletProvider } from "./dapp/index.ts";
+import { WalletProvider, SmartContractProvider } from "./dapp/index.ts";
 import {PokemonRoutes} from "./pokemon";
+import { POKEMON_CONTRACT } from "./dapp/config/pokemonContractConfig.ts";
 
 export const PokemonApp = () => {
     return (
         <WalletProvider>
-            <PokemonRoutes/>
+            <SmartContractProvider contractAddress={ POKEMON_CONTRACT.address } contractAbi={ POKEMON_CONTRACT.abi } >
+                <PokemonRoutes/>
+            </SmartContractProvider>
         </WalletProvider>
     )
 }

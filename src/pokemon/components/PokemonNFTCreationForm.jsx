@@ -4,7 +4,8 @@ import { POKEMON_CONTRACT } from "../../dapp/config";
 import { capitalize } from "lodash";
 import { useState } from "react";
 
-export const PokemonNFTCreationForm = ({ pokemon, encodedImg }) => {
+
+export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
 
   const { createPokemonNFT, isContractLoaded } = usePokemonSmartContract(POKEMON_CONTRACT.address, POKEMON_CONTRACT.abi);
   const [ pokemonNickname, setPokemonNickname ] = useState(capitalize(pokemon.name));
@@ -17,23 +18,24 @@ export const PokemonNFTCreationForm = ({ pokemon, encodedImg }) => {
 
   return (
     <>
-          { isContractLoaded ?
+          { isContractLoaded  ?
 
             <>
 
               <span>Select and image and a nickname to get your NFT: </span>
-              <form className="d-inline">
-                <input className="form-control d-inline w-25 m-1" 
-                  autoComplete="off"
-                  onChange={ onChangeNicknameSubmit } 
-                  placeholder={ capitalize(pokemon.name) } 
-                  value={ pokemonNickname } 
-                />
-                <button className="btn m-1 pokeGoBackButton d-inline" onClick={() => createPokemonNFT(pokemon, encodedImg, pokemonNickname) }>
-                    Get NFT
-                </button>
-              </form>
-
+                <div className="flex-container d-inline">
+                  <input className="form-control w-25 m-1 d-inline-flex" 
+                    id={ pokemon.name }
+                    autoComplete="off"
+                    onChange={ onChangeNicknameSubmit } 
+                    placeholder={ capitalize(pokemon.name) } 
+                    value={ pokemonNickname }
+                  />
+                  <button id="create-pokemon" className="btn m-1 pokeGoBackButton d-inline-flex" onClick={() => createPokemonNFT({...pokemon}, imgUrl, pokemonNickname.valueOf()) }>
+                      Get NFT
+                  </button>
+                </div>
+  
             </>
             : 
             <>
@@ -48,5 +50,5 @@ export const PokemonNFTCreationForm = ({ pokemon, encodedImg }) => {
 
 PokemonNFTCreationForm.propTypes = {
   pokemon: PropTypes.object,
-  encodedImg: PropTypes.string
+  imgUrl: PropTypes.string
 };
