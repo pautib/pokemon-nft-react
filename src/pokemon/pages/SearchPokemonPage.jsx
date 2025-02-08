@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import { PokemonCard, PokeballSpinner } from "../components";
 import { useMemo } from "react";
 import { usePokemonSearchList } from "../hooks";
+import { LazyComponent } from "../../ui"
 
 export const SearchPokemonPage = () => {
 
@@ -54,7 +55,7 @@ export const SearchPokemonPage = () => {
 
             <div className="row rows-cols-1 row-cols-md-3 g-3">
                 {
-                    pokemons?.map( pokemon => (<PokemonCard key={ pokemon.id } {...pokemon } />) )
+                    pokemons?.map( pokemon => (<LazyComponent key={ pokemon.name + pokemon.id }> <PokemonCard key={ pokemon.id } {...pokemon } /> </LazyComponent>) )
                 }
             </div>
         </>
