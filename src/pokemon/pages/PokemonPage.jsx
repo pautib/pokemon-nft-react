@@ -26,7 +26,10 @@ export const PokemonPage = () => {
     const onSelectCarouselImg = (selectedIndex) => {
 
         if (!loading) {
-            if (Object.entries(pokemon.sprites).length === 0) return;
+            if (Object.entries(pokemon.sprites).length === 0) {
+                setPickedImg("./whos.png")
+                return;
+            }
    
             setPickedImg(Object.values(pokemon.sprites)[selectedIndex]);
             /** 

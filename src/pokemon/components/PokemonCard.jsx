@@ -10,12 +10,14 @@ export const PokemonCard = ({
       imgUrl,
     }) => {
 
+        const usedImg = imgUrl ? imgUrl : "./whos.png";
+
         return (
             <div className="col animate__animated animate__fadeIn">
                 <div className="card mt-0 mx-0" style={{ display: 'flow',}} >
                     <div className="row no-gutters" >
                         <div className="col-5">
-                            <img src={ imgUrl } className="card-img" alt={ id } />
+                            <img src={ usedImg } className="card-img" alt={ id } />
                         </div>
 
                         <div className="col-7">

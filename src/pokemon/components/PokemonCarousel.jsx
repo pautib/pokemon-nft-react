@@ -13,9 +13,14 @@ export const PokemonCarousel = ({
         = useCarouselCounter(0,0, Object.values(imageJson).length - 1);
 
     useEffect(() => {
-        let footer = Object.entries(imageJson)?.at(activeImgIndex)[0];
-        setFooterImgText(customizeFooterText(footer));
-        onSelectImg(activeImgIndex);
+        if (Object.entries(imageJson).length > 0) {
+            let footer = Object.entries(imageJson)?.at(activeImgIndex)[0];
+            setFooterImgText(customizeFooterText(footer));
+            onSelectImg(activeImgIndex);
+        } else {
+            setFooterImgText("?");
+            onSelectImg(0);
+        }
     }, [activeImgIndex]);
 
     function customizeFooterText(imgName) {
@@ -39,6 +44,19 @@ export const PokemonCarousel = ({
                                 />
                             </div>
                         ))
+                    } 
+                    {
+                        Object.entries(imageJson).length === 0 && 
+                        (
+                            <div className="carousel-item active">
+                                <img
+                                    id="carousel-img active"
+                                    src="./whos.png"
+                                    className="img-thumbnail img-fluid animate__animated animate__fadeInLeft"
+                                    style={{backgroundSize: "cover",  width: "100vw", maxWidth: "100%" }}
+                                />
+                            </div>
+                        )
                     }
                 </div>
 

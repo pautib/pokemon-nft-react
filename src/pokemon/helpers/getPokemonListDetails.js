@@ -15,29 +15,43 @@ async function getAllPokemonList() {
 
 async function getPokemonCardDetails(pokemon) {
 
-  return fetch(pokemon.url)
-      .then((response) => response.json())
-      .then(bodyResp => bodyResp)
-      .then(res => ( {
-          id: res.id,
-          name: res.name,
-          imgUrl: res.sprites.front_default,
-          height: res.height,
-          weight: res.weight,
-      }))
-      .catch(error => {
-          console.error(error);
-          throw new Error(`Cannot fetch ${pokemon.name} details from ${pokemon.url}`);
-      });
+    let chosenImg = "./whos.png";
+
+    return fetch(pokemon.url)
+        .then((response) => response.json())
+        .then(bodyResp => bodyResp)
+        .then(res => {
+            
+            if (res.sprites.front_default) {
+                chosenImg = res.sprites.front_default;
+            }
+            
+            if (res.sprites.other['official-artwork'].front_default) {
+                chosenImg = res.sprites.other['official-artwork'].front_default;
+            }
+
+            if (res.sprites.other.home.front_default) {
+                chosenImg = res.sprites.other.home.front_default;
+            }
+
+            return { 
+                id: res.id,
+                name: res.name,
+                imgUrl: chosenImg,
+                height: res.height,
+                weight: res.weight,
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            throw new Error(`Cannot fetch ${pokemon.name} details from ${pokemon.url}`);
+        });
 }
 
-export const getPokemonListDetails = async(name) => {
+export const getPokemonListDetails = async() => {
 
     let pokemonFiltered = await getAllPokemonList();
 
-    if (name.trim()) {
-        pokemonFiltered = pokemonFiltered.filter((pokemon) => pokemon.name.includes(name) );
-    }
     const pokemonCardsList = await Promise.all(
         pokemonFiltered.map( (pokemon) => { return getPokemonCardDetails(pokemon); })
     );
