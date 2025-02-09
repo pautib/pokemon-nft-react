@@ -67,3 +67,8 @@
 .pokeNavWalletButton.active {
     background-color:  #3c5aa6;
 }
+.link-like {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
