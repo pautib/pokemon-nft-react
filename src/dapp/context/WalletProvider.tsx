@@ -5,8 +5,9 @@ import {
     useState,
 } from "react"
 import { WalletContext } from "./WalletContext"
-import { EIP6963ProviderDetail, EIP6963ProviderInfo, SelectedAccountByWallet, EIP6963ProviderEvent, WalletError, WalletProviderContext} from "../config"
-import { EIP6963EventNames, LOCAL_STORAGE_KEYS, isSupportedChain, networkInfoMap } from "../config"
+import { EIP6963ProviderDetail, EIP6963ProviderInfo, SelectedAccountByWallet, WalletError, WalletProviderContext} from "../config"
+import { EIP6963EventNames, EIP1193EventNames, LOCAL_STORAGE_KEYS, isSupportedChain, networkInfoMap } from "../config"
+import { doesProviderHasAddListener, doesProviderHasRemoveListener } from "../utils"
 
 
 // The WalletProvider component wraps all other components in the dapp, providing them with the necessary data and functions related to wallets.
@@ -27,7 +28,8 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setSelectedAccountByWalletRdns(JSON.parse(savedSelectedAccountByWalletRdns))
     }
 
-    function onAnnouncement(event: EIP6963ProviderEvent) {
+    function onAnnouncement(event: WindowEventMap[EIP6963EventNames.Announce]) {
+
       setWallets(currentWallets => ({
         ...currentWallets,
         [event.detail.info.rdns]: event.detail
@@ -49,41 +51,29 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
 
-    function onChainChanged(event: string) { // event is a string with the new chain id
-      
-      if (selectedWalletRdns) {
-        const wallet = wallets[selectedWalletRdns]
-      
-        setWallets(currentWallets => ({
-          ...currentWallets,
-          [wallet.info.rdns]: {
-            ...wallet,
-            provider: {
-              ...wallet.provider,
-              chainId: event
-            }
-        }}))
-
-        clearError();
-      }
+    function onChainChanged(event: WindowEventMap[EIP1193EventNames.ChainChanged]) {
+      // When the network changes we need to recreate the provider: https://github.com/ethers-io/ethers.js/issues/4506
+      window.dispatchEvent(new Event(EIP6963EventNames.Request));
     }
 
-    if (selectedWalletRdns) {
-      wallets[selectedWalletRdns].provider.addListener("chainChanged", onChainChanged)
+    if (selectedWalletRdns && doesProviderHasAddListener(wallets[selectedWalletRdns].provider)) {
+      wallets[selectedWalletRdns].provider.addListener(EIP1193EventNames.ChainChanged, onChainChanged)
     }
     
     return () => {
-      if (selectedWalletRdns) {
-        wallets[selectedWalletRdns].provider.removeListener("chainChanged", onChainChanged)
+
+      if (selectedWalletRdns && doesProviderHasRemoveListener(wallets[selectedWalletRdns].provider)) {
+        wallets[selectedWalletRdns].provider.removeListener(EIP1193EventNames.ChainChanged, onChainChanged)
       }
+
     }
 
-  }, [selectedWalletRdns])
+  }, [selectedWalletRdns, wallets])
 
 
   useEffect(() => {
 
-    function onAccountsChanged(event: string[]) { // event is a string array with the account as first element
+    function onAccountsChanged(event: WindowEventMap[EIP1193EventNames.AccountsChanged]) {
 
       if (selectedWalletRdns && selectedAccountByWalletRdns) {
         const wallet = wallets[selectedWalletRdns]
@@ -101,21 +91,22 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
         )
 
         clearError();
-
       }
     }
 
-    if (selectedWalletRdns) {
-      wallets[selectedWalletRdns].provider.addListener("accountsChanged", onAccountsChanged)
+    if (selectedWalletRdns && doesProviderHasAddListener(wallets[selectedWalletRdns].provider)) {
+      wallets[selectedWalletRdns].provider.addListener(EIP1193EventNames.AccountsChanged, onAccountsChanged)
     }
     
     return () => {
-      if (selectedWalletRdns) {
-        wallets[selectedWalletRdns].provider.removeListener("accountsChanged", onAccountsChanged)
+
+      if (selectedWalletRdns && doesProviderHasRemoveListener(wallets[selectedWalletRdns].provider)) {
+        wallets[selectedWalletRdns].provider.removeListener(EIP1193EventNames.AccountsChanged, onAccountsChanged)
       }
+
     }
 
-  }, [selectedWalletRdns, selectedAccountByWalletRdns])
+  }, [selectedWalletRdns, selectedAccountByWalletRdns, wallets])
 
 
   const connectWallet = useCallback(async (walletRdns: EIP6963ProviderInfo['rdns']) => {
@@ -149,6 +140,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setError(`Code: ${walletError.code} \nError Message: ${walletError.message}`)
     }
   }, [wallets, selectedAccountByWalletRdns])
+
 
   const disconnectWallet = useCallback(async () => {
 
@@ -188,7 +180,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setError("Attempt to switch to a non-registered chain!")
       return console.error("Attempt to switch to a non-registered chain!");
     }
-
+    
     if (selectedWalletRdns) {
 
       const wallet = wallets[selectedWalletRdns]

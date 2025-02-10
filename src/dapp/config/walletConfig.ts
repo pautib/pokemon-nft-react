@@ -1,7 +1,12 @@
 declare global {
     interface WindowEventMap {
-      "eip6963:announceProvider": CustomEvent
-      "chainChanged": CustomEvent
+      "eip6963:announceProvider": EIP6963ProviderEvent
+      "chainChanged": string,
+      "accountsChanged": string[],
+    }
+
+    interface Window {
+      ethereum: any
     }
 }
 
@@ -91,7 +96,16 @@ export type SelectedAccountByWallet = Record<string, string | null>
  */
 export enum EIP6963EventNames {
     Announce = "eip6963:announceProvider",
-    Request = "eip6963:requestProvider",
+    Request = "eip6963:requestProvider"
+}
+
+/**
+ * @title EIP1193EventNames
+ * @dev Enum defining EIP-1193 event names.
+ */
+export enum EIP1193EventNames {
+  ChainChanged = "chainChanged",
+  AccountsChanged = "accountsChanged"
 }
 
 /**

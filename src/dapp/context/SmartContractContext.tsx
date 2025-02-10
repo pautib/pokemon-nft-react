@@ -8,7 +8,8 @@ const init : SmartContractProviderContext = {
     contract: null,
     signer: null,
     contractError: INIT_ERROR_MSG,
-    setContractError: () => {}
+    setContractError: () => {},
+    isContractLoaded: false
 }
 
 // Create the context

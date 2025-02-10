@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
-import { usePokemonSmartContract } from "../../dapp/hooks";
-import { POKEMON_CONTRACT } from "../../dapp/config";
+import { usePokemonSmartContract, useWalletProvider } from "../../dapp/hooks";
+import { POKEMON_CONTRACT, SupportedChainId } from "../../dapp/config";
 import { capitalize } from "lodash";
 import { useState } from "react";
 
 
 export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
 
+  const { switchChain, selectedWallet } = useWalletProvider();
   const { createPokemonNFT, isContractLoaded } = usePokemonSmartContract(POKEMON_CONTRACT.address, POKEMON_CONTRACT.abi);
   const [ pokemonNickname, setPokemonNickname ] = useState(capitalize(pokemon.name));
 
@@ -18,10 +19,9 @@ export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
 
   return (
     <>
-          { isContractLoaded  ?
+          { isContractLoaded  &&
 
             <>
-
               <span>Select and image and a nickname to get your NFT: </span>
                 <div className="flex-container d-inline">
                   <input className="form-control w-25 m-1 d-inline-flex" 
@@ -35,14 +35,21 @@ export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
                       Get NFT
                   </button>
                 </div>
-  
             </>
-            : 
+           
+          }
+
+          { !isContractLoaded && selectedWallet &&
             <>
-              <span>Connect to Sepolia Testnet to buy this Pokemon NFT</span>
+              <span className="link-like" onClick={() => switchChain(SupportedChainId.SEPOLIA) }>Connect to Sepolia Testnet to buy this Pokemon NFT</span>
             </>
           }
 
+          { !selectedWallet && 
+            <>
+              <span>Connect to a Wallet in the Sepolia Testnet to buy this Pokemon NFT.</span>
+            </>
+          }
     </>
     
   );

@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Pokemon } from '../config';
 import { useSmartContractProvider } from './userSmartContractProvider';
 
 
 export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemonContractAbi: InterfaceAbi*/) => {
 
-  //const {contract: theContract, contractError, setContractError } = useSmartContract<Contract>(pokemonContractAddress, pokemonContractAbi);
-  const {contract: theContract, contractError, setContractError } = useSmartContractProvider();
-  const [isContractLoaded, setIsContractLoaded] = useState(false);
+  const {contract: theContract, contractError, setContractError, isContractLoaded } = useSmartContractProvider();
   const pokemonContract = useMemo(() => theContract, [theContract]);
 
   useEffect(() => {
@@ -18,14 +16,12 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
 
     if (pokemonContract) {
       pokemonContract.addListener("NewPokemon", listener);
-      setIsContractLoaded(true);
       setContractError(null)
     }
 
     return () => {
       if (pokemonContract) {
         pokemonContract.removeListener("NewPokemon", listener);
-        setIsContractLoaded(false);
       }
     }
 
