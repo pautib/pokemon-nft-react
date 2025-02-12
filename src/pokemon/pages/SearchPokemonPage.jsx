@@ -1,5 +1,5 @@
 import { useForm } from "../../hooks/useForm.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import queryString from 'query-string';
 import { PokemonCard, PokeballSpinner } from "../components";
 import { useMemo } from "react";

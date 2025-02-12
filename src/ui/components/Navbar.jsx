@@ -1,4 +1,4 @@
-import {Link, NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router';
 import {DApp} from "../../dapp/components/DApp";
 import { PopupButton } from './PopupButton.jsx';
 import { SelectedWallet, DisconnectWallet } from '../../dapp/index.ts';
