@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { Pokemon } from '../config';
 import { useSmartContractProvider } from './userSmartContractProvider';
+import { ErrorDescription } from 'ethers';
+import { getErrorDescription } from '../config';
 
 
 export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemonContractAbi: InterfaceAbi*/) => {
@@ -62,7 +64,12 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
       })
       .catch((error) => {
         console.error("Error minting Pokemon NFT:", error);
-        setContractError(error.message);
+        let customError : (ErrorDescription | null) = pokemonContract.interface.parseError(error.data);
+        let errorDescription;
+        if (customError) {
+          errorDescription = getErrorDescription(customError.name);
+        }
+        setContractError(errorDescription ? errorDescription : error.message);
       });
       
     } else {

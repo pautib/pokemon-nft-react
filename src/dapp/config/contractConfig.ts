@@ -7,3 +7,18 @@ export interface SmartContractProviderContext {
     setContractError: React.Dispatch<React.SetStateAction<string | null>>,
     isContractLoaded: boolean
 }
+
+type ErrorDescriptions = {
+    [key: string]: string;
+};
+
+const errorDescriptions: ErrorDescriptions = {
+    "PokemonNotEnoughLevel": "The Pokemon's level is not high enough.",
+    "PokemonNotEnoughFee": "The fee provided is not sufficient.",
+    "PokemonLimitExceeded": "Each account is allowed to have no more than 6 pokemon."
+};
+
+// Example usage
+export function getErrorDescription(errorName: string): string {
+    return errorDescriptions[errorName];
+}

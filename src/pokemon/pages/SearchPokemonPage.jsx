@@ -11,7 +11,7 @@ export const SearchPokemonPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const {query = "" } = queryString.parse( location.search );
+    const { query = "" } = queryString.parse( location.search );
     const { searchText, onInputChange } = useForm({searchText: query});
 
     const pokemonList = usePokemonSearchList(query);
