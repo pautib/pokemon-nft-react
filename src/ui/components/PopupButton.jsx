@@ -21,10 +21,11 @@ export const PopupButton = ({buttonTitle, children, style}) => {
     setAnchor(anchor ? null : event.currentTarget);
   };
 
-  const open = Boolean(anchor);
-  const id = open ? 'wallet-popper' : undefined;
-
   style.buttonClassName ??= '';
+  style.buttonId ??= 'popper';
+
+  const open = Boolean(anchor);
+  const id = open ? style.buttonId : undefined;
 
   return (
     <div className="flex-container">

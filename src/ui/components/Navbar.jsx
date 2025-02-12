@@ -54,7 +54,7 @@ export const Navbar = ({baseUri}) => {
                 <ul className="navbar-nav ml-auto">
 
                     <span className="nav-item nav-link" style={{ fontWeight: 'bold', color: '#f2c304' }}>
-                        <PopupButton buttonTitle={"Available Wallets"} style= { { buttonClassName: 'pokeNavWalletButton'} } >
+                        <PopupButton buttonTitle={"Available Wallets"} style= { { buttonClassName: 'pokeNavWalletButton', buttonId: 'wallet-popper'} } >
                             <DApp/>
                         </PopupButton>
                     </span>
