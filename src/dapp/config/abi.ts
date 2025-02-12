@@ -3,6 +3,43 @@ import { Interface } from "ethers";
 export const ABI =  new Interface ([
         {
             "type": "function",
+            "name": "approve",
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_tokenId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "balanceOf",
+            "inputs": [
+                {
+                    "name": "_owner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
             "name": "burnPokemon",
             "inputs": [
                 {
@@ -34,6 +71,157 @@ export const ABI =  new Interface ([
         },
         {
             "type": "function",
+            "name": "createRandomPokemon",
+            "inputs": [
+                {
+                    "name": "_pokedex_id",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_nickname",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_img_sprite_url",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_ability1_name",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_ability2_name",
+                    "type": "string",
+                    "internalType": "string"
+                },
+                {
+                    "name": "_base_hp",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_attack",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_defense",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_attack_sp",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_defense_sp",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_speed",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_height",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_base_weight",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "getApproved",
+            "inputs": [
+                {
+                    "name": "_tokenId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getHpValue",
+            "inputs": [
+                {
+                    "name": "_base_hp",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_iv_hp",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_ev_hp",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "level",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "stateMutability": "pure"
+        },
+        {
+            "type": "function",
+            "name": "getNaturePokemonArray",
+            "inputs": [
+                {
+                    "name": "_nature_index",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint8[5]",
+                    "internalType": "uint8[5]"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
             "name": "getPokemon",
             "inputs": [
                 {
@@ -59,7 +247,7 @@ export const ABI =  new Interface ([
                             "internalType": "string"
                         },
                         {
-                            "name": "img_encoded_sprite",
+                            "name": "img_sprite_url",
                             "type": "string",
                             "internalType": "string"
                         },
@@ -79,32 +267,32 @@ export const ABI =  new Interface ([
                             "internalType": "uint16"
                         },
                         {
-                            "name": "hp",
+                            "name": "base_hp",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
                         {
-                            "name": "attack",
+                            "name": "base_attack",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
                         {
-                            "name": "defense",
+                            "name": "base_defense",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
                         {
-                            "name": "attack_sp",
+                            "name": "base_attack_sp",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
                         {
-                            "name": "defense_sp",
+                            "name": "base_defense_sp",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
                         {
-                            "name": "speed",
+                            "name": "base_speed",
                             "type": "uint16",
                             "internalType": "uint16"
                         },
@@ -238,46 +426,79 @@ export const ABI =  new Interface ([
         },
         {
             "type": "function",
+            "name": "getStatValue",
+            "inputs": [
+                {
+                    "name": "_base_stat",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                },
+                {
+                    "name": "_iv_stat",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_ev_stat",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "level",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "_nature_multiplier",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint16",
+                    "internalType": "uint16"
+                }
+            ],
+            "stateMutability": "pure"
+        },
+        {
+            "type": "function",
+            "name": "isApprovedForAll",
+            "inputs": [
+                {
+                    "name": "_owner",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "_operator",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bool",
+                    "internalType": "bool"
+                }
+            ],
+            "stateMutability": "pure"
+        },
+        {
+            "type": "function",
             "name": "levelUp",
             "inputs": [
                 {
                     "name": "_pokemonId",
                     "type": "uint256",
                     "internalType": "uint256"
-                },
-                {
-                    "name": "_hp_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_atk_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_def_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_atk_sp_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_def_sp_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
-                },
-                {
-                    "name": "_speed_increase",
-                    "type": "uint16",
-                    "internalType": "uint16"
                 }
             ],
             "outputs": [],
-            "stateMutability": "nonpayable"
+            "stateMutability": "payable"
         },
         {
             "type": "function",
@@ -294,7 +515,7 @@ export const ABI =  new Interface ([
                     "internalType": "string"
                 },
                 {
-                    "name": "_img_encoded_sprite",
+                    "name": "_img_sprite_url",
                     "type": "string",
                     "internalType": "string"
                 },
@@ -364,6 +585,19 @@ export const ABI =  new Interface ([
                 }
             ],
             "stateMutability": "pure"
+        },
+        {
+            "type": "function",
+            "name": "owner",
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "view"
         },
         {
             "type": "function",
@@ -562,6 +796,56 @@ export const ABI =  new Interface ([
         },
         {
             "type": "event",
+            "name": "Approval",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "approved",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "tokenId",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "ApprovalForAll",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "operator",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "approved",
+                    "type": "bool",
+                    "indexed": false,
+                    "internalType": "bool"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
             "name": "NewPokemon",
             "inputs": [
                 {
@@ -631,6 +915,131 @@ export const ABI =  new Interface ([
         },
         {
             "type": "error",
+            "name": "ERC721IncorrectOwner",
+            "inputs": [
+                {
+                    "name": "sender",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "tokenId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InsufficientApproval",
+            "inputs": [
+                {
+                    "name": "operator",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "tokenId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InvalidApprover",
+            "inputs": [
+                {
+                    "name": "approver",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InvalidOperator",
+            "inputs": [
+                {
+                    "name": "operator",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InvalidOwner",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InvalidReceiver",
+            "inputs": [
+                {
+                    "name": "receiver",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721InvalidSender",
+            "inputs": [
+                {
+                    "name": "sender",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "ERC721NonexistentToken",
+            "inputs": [
+                {
+                    "name": "tokenId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "OwnableInvalidOwner",
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "OwnableUnauthorizedAccount",
+            "inputs": [
+                {
+                    "name": "account",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
             "name": "PokemonApprovalNotAllowed",
             "inputs": [
                 {
@@ -653,6 +1062,27 @@ export const ABI =  new Interface ([
                     "name": "trainerAddress",
                     "type": "address",
                     "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "PokemonNotEnoughFee",
+            "inputs": [
+                {
+                    "name": "pokemonId",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "currentLevel",
+                    "type": "uint8",
+                    "internalType": "uint8"
+                },
+                {
+                    "name": "requiredFee",
+                    "type": "uint256",
+                    "internalType": "uint256"
                 }
             ]
         },
@@ -693,4 +1123,4 @@ export const ABI =  new Interface ([
                 }
             ]
         }
-]);
+    ]);
