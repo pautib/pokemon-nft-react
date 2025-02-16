@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
 import { getPokemonListDetails } from '../helpers';
+import { useQuery } from '@tanstack/react-query';
 
-export const usePokemonSearchList = (query = '') => {
+
+export const usePokemonSearchList = (query) => {
     
-    const [pokemons, setPokemons] = useState(undefined); // full list of Pokemons
+    const { isPending: isLoading, error: searchError, data: pokemons } = useQuery({
+        queryKey: ['searchPokemonList'],
+        queryFn: () => getPokemonListDetails(),
+    });
 
-    useEffect(() => {
-        getPokemonListDetails('')
-            .then(list => setPokemons(list));
-    }, []);
-
-
-    return pokemons?.filter(pokemon => pokemon.name.includes(query));
+    return {
+        pokemons: pokemons?.filter(pokemon => pokemon.name.includes(query)),
+        isLoading,
+        searchError
+    }
 }

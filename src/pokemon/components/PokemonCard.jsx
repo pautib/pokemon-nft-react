@@ -1,6 +1,8 @@
 import { NavLink } from "react-router";
 import PropTypes from 'prop-types';
 import { BASE_URI } from "../routes";
+import { DEFAULT_CARD_IMG } from "../helpers";
+
 
 export const PokemonCard = ({
       id,
@@ -10,7 +12,7 @@ export const PokemonCard = ({
       imgUrl,
     }) => {
 
-        const usedImg = imgUrl ? imgUrl : "./whos.png";
+        const usedImg = imgUrl ? imgUrl : DEFAULT_CARD_IMG;
 
         return (
             <div className="col animate__animated animate__fadeIn">

@@ -1,9 +1,11 @@
-const pokeApiRoot = 'https://pokeapi.co/api/v2/pokemon/';
-const pokeApiAllPokemonRoot =  pokeApiRoot + '?limit=2000';
+import { DEFAULT_CARD_IMG } from "../helpers";
+
+const POKEAPI_ROOT = 'https://pokeapi.co/api/v2/pokemon/';
+const POKEAPI_ALL_POKEMON = POKEAPI_ROOT + '?limit=2000';
 
 
 async function getAllPokemonList() {
-    return fetch(pokeApiAllPokemonRoot)
+    return fetch(POKEAPI_ALL_POKEMON)
         .then((response) => response.json())
         .then(bodyResp => bodyResp.results)
         .catch(error => {
@@ -15,7 +17,7 @@ async function getAllPokemonList() {
 
 async function getPokemonCardDetails(pokemon) {
 
-    let chosenImg = "./whos.png";
+    let chosenImg = DEFAULT_CARD_IMG;
 
     return fetch(pokemon.url)
         .then((response) => response.json())
@@ -50,10 +52,10 @@ async function getPokemonCardDetails(pokemon) {
 
 export const getPokemonListDetails = async() => {
 
-    let pokemonFiltered = await getAllPokemonList();
+    let allPokemon = await getAllPokemonList();
 
     const pokemonCardsList = await Promise.all(
-        pokemonFiltered.map( (pokemon) => { return getPokemonCardDetails(pokemon); })
+        allPokemon.map( (pokemon) => { return getPokemonCardDetails(pokemon); })
     );
 
     return pokemonCardsList;

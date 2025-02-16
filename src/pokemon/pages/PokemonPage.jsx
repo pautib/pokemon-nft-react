@@ -32,11 +32,7 @@ export const PokemonPage = () => {
             }
    
             setPickedImg(Object.values(pokemon.sprites)[selectedIndex]);
-            /** 
-            getBase64EncodedImg(Object.values(pokemon.sprites)[selectedIndex]).then((img) => {  
-                setPickedImg(img);
-            });
-            */
+
         }
 
     };
