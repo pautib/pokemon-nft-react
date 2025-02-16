@@ -2,7 +2,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 
-export const LazyComponent = ( { children }) => {
+export const LazyComponent = ( { children, loadingNode }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null); // <HTMLDivElement | null> in typescript
 
@@ -34,7 +34,7 @@ export const LazyComponent = ( { children }) => {
           { children }
         </Suspense>
       ) : (
-        <p>Go down to load the component...</p>
+        <> { loadingNode} </>
       )}
     </div>
   );
@@ -42,4 +42,5 @@ export const LazyComponent = ( { children }) => {
 
 LazyComponent.propTypes = {
     children: PropTypes.node,
+    loadingNode: PropTypes.node,
 };
