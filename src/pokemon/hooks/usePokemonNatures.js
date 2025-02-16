@@ -1,26 +1,21 @@
-import { useEffect, useState} from 'react';
+import { useState} from 'react';
 import { getNaturesArrayValues } from '../helpers';
+import { useQuery } from '@tanstack/react-query';
 
 export const usePokemonNatures = (initialValue = []) => {
 
-    const [naturesArray, setNaturesArray] = useState(initialValue);
+    const { isPending: isLoading, error, data: naturesArray } = useQuery({
+        queryKey: ['pokemonNatures'],
+        queryFn: () => getNaturesArrayValues()
+    });
+
     const [selectedNature, setSelectedNature] = useState([1,1,1,1,1,1]);
-    const [areNaturesLoading, setAreNaturesLoading] = useState(true);
-
-    useEffect(() => {
-
-        getNaturesArrayValues()
-            .then((obj) => {
-                setNaturesArray(obj)
-            })
-            .finally(() => setAreNaturesLoading(false));
-
-    }, []);
 
     return {
-        natures: naturesArray,
+        error,
+        natures: naturesArray ?? initialValue,
         selectedNature: selectedNature,
         setSelectedNature: setSelectedNature,
-        areNaturesLoading: areNaturesLoading,
+        areNaturesLoading: isLoading,
     };
 }

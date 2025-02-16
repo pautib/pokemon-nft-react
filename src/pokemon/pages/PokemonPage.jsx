@@ -9,7 +9,7 @@ export const PokemonPage = () => {
 
     // eslint-disable-next-line no-unused-vars
     const { pokemonId, ...rest } = useParams();
-    const {isLoading, ...pokemon} = usePokemon(pokemonId);
+    const { isLoading, ...pokemon } = usePokemon(pokemonId);
     const [ pickedImg, setPickedImg ] = useState(null);
 
     const navigate = useNavigate();
