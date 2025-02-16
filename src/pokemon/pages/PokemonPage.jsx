@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { capitalize } from "lodash";
 import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
@@ -9,8 +9,7 @@ export const PokemonPage = () => {
 
     // eslint-disable-next-line no-unused-vars
     const { pokemonId, ...rest } = useParams();
-    const {loading, ...mappedPokemon} = usePokemon(pokemonId);
-    const pokemon = useMemo(() => mappedPokemon, [mappedPokemon]);
+    const {isLoading, ...pokemon} = usePokemon(pokemonId);
     const [ pickedImg, setPickedImg ] = useState(null);
 
     const navigate = useNavigate();
@@ -21,25 +20,23 @@ export const PokemonPage = () => {
 
     useEffect(() => {
         onSelectCarouselImg(0);
-    }, [loading]);
+    }, [isLoading]);
 
     const onSelectCarouselImg = (selectedIndex) => {
 
-        if (!loading) {
+        if (!isLoading) {
             if (Object.entries(pokemon.sprites).length === 0) {
                 setPickedImg("./whos.png")
                 return;
             }
    
             setPickedImg(Object.values(pokemon.sprites)[selectedIndex]);
-
         }
-
     };
 
 
     return (
-        loading ? (
+        isLoading ? (
             <PokeballSpinner/>
         ) : (
 
