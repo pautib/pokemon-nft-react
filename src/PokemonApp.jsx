@@ -1,9 +1,9 @@
 import { WalletProvider, SmartContractProvider } from './dapp/index.ts';
-import {PokemonRoutes} from './pokemon';
+import { PokemonRoutes } from './pokemon';
 import { POKEMON_CONTRACT } from './dapp/config/pokemonContractConfig.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
- export const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 export const PokemonApp = () => {
     return (
