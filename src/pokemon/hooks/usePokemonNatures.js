@@ -6,7 +6,8 @@ export const usePokemonNatures = (initialValue = []) => {
 
     const { isPending: isLoading, error, data: naturesArray } = useQuery({
         queryKey: ['pokemonNatures'],
-        queryFn: () => getNaturesArrayValues()
+        queryFn: () => getNaturesArrayValues(),
+        staleTime: Infinity
     });
 
     const [selectedNature, setSelectedNature] = useState([1,1,1,1,1,1]);

@@ -5,7 +5,8 @@ export const usePokemon = (pokemonId = 0) => {
 
     const { isPending: isLoading, error, data: fetchedPokemon } = useQuery({
         queryKey: ['pokemonDetails', pokemonId],
-        queryFn: () => getPokemonDetails(pokemonId)
+        queryFn: () => getPokemonDetails(pokemonId),
+        staleTime: Infinity
     });
 
     const getPokemonDetails = async(pokemonId) => {

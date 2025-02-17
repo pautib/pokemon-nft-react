@@ -7,6 +7,7 @@ export const usePokemonSearchList = (query) => {
     const { isPending: isLoading, error: searchError, data: pokemons } = useQuery({
         queryKey: ['searchPokemonList'],
         queryFn: () => getPokemonListDetails(),
+        staleTime: Infinity
     });
 
     return {
