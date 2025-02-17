@@ -83,7 +83,8 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
   return {
     createPokemonNFT,
     contractError,
-    isContractLoaded
+    isContractLoaded,
+    setContractError
   }
 
 }

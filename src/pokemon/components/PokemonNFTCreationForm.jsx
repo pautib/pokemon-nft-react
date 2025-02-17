@@ -3,12 +3,13 @@ import { usePokemonSmartContract, useWalletProvider } from "../../dapp/hooks";
 import { POKEMON_CONTRACT, SupportedChainId } from "../../dapp/config";
 import { capitalize } from "lodash";
 import { useState } from "react";
+import { PopupWindow } from "../../ui";
 
 
 export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
 
   const { switchChain, selectedWallet } = useWalletProvider();
-  const { createPokemonNFT, isContractLoaded } = usePokemonSmartContract(POKEMON_CONTRACT.address, POKEMON_CONTRACT.abi);
+  const { createPokemonNFT, isContractLoaded, contractError, setContractError } = usePokemonSmartContract(POKEMON_CONTRACT.address, POKEMON_CONTRACT.abi);
   const [ pokemonNickname, setPokemonNickname ] = useState(capitalize(pokemon.name));
 
   
@@ -50,6 +51,10 @@ export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
               <span>Connect to a Wallet in the Sepolia Testnet to buy this Pokemon NFT.</span>
             </>
           }
+
+          <PopupWindow open = { isContractLoaded && !!contractError } title = "Contract Call Error" onClose = { () => setContractError(null) } >
+            { contractError }
+          </PopupWindow>
     </>
     
   );
