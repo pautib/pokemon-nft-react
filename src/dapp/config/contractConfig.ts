@@ -15,7 +15,7 @@ type ErrorDescriptions = {
 const errorDescriptions: ErrorDescriptions = {
     "PokemonNotEnoughLevel": "The Pokemon's level is not high enough.",
     "PokemonNotEnoughFee": "The fee provided is not sufficient.",
-    "PokemonLimitExceeded": "Each account is allowed to have no more than 6 pokemon."
+    "PokemonLimitExceeded": "Each account can only have up to 6 pokemon."
 };
 
 // Example usage

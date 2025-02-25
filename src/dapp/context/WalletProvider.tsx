@@ -51,7 +51,7 @@ export const WalletProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
 
-    function onChainChanged(event: WindowEventMap[EIP1193EventNames.ChainChanged]) {
+    function onChainChanged(/**event: WindowEventMap[EIP1193EventNames.ChainChanged]**/) {
       // When the network changes we need to recreate the provider: https://github.com/ethers-io/ethers.js/issues/4506
       window.dispatchEvent(new Event(EIP6963EventNames.Request));
     }

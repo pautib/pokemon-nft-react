@@ -52,7 +52,12 @@ export const PokemonNFTCreationForm = ({ pokemon, imgUrl }) => {
             </>
           }
 
-          <PopupWindow open = { isContractLoaded && !!contractError } title = "Contract Call Error" onClose = { () => setContractError(null) } >
+          <PopupWindow 
+            open = { isContractLoaded && !!contractError } 
+            title = "Contract Call Error" 
+            onClose = { () => setContractError(null) }
+            style= { { buttonClassName: 'btn m-2 pokeGoBackButton', buttonId: 'contract-error-window'} }
+            >
             { contractError }
           </PopupWindow>
     </>
