@@ -1,7 +1,7 @@
-import {Navigate, Route, Routes} from "react-router";
-import {SearchPokemonPage, PokemonPage} from "../pages";
-import {Navbar} from "../../ui";
-import {DApp} from "../../dapp/components/DApp";
+import { Navigate, Route, Routes } from "react-router";
+import { SearchPokemonPage, PokemonPage } from "../pages";
+import { Navbar } from "../../ui";
+import { DApp } from "../../dapp/components/DApp";
 
 export const PokemonRoutes = () => {
 

@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import { PokemonCard, PokeballSpinner } from "../components";
 import { usePokemonSearchList } from "../hooks";
 import { LazyComponent } from "../../ui"
+import { useScrollRestoration } from "../../hooks";
 
 
 export const SearchPokemonPage = () => {
@@ -14,6 +15,7 @@ export const SearchPokemonPage = () => {
     const { query = '' } = queryString.parse( location.search );
     const { searchText, onInputChange } = useForm({searchText: query});
     const { pokemons, isLoading } = usePokemonSearchList(query);
+    const { setPickedPokemon } = useScrollRestoration();
 
     const showError = query.length > 0 && pokemons?.length === 0;
 
@@ -51,10 +53,15 @@ export const SearchPokemonPage = () => {
 
             <div className="row rows-cols-1 row-cols-md-3 g-3">
                 {
-                    !isLoading && pokemons?.map( pokemon => (<LazyComponent key={ pokemon.name + pokemon.id }> <PokemonCard key={ pokemon.id } {...pokemon } /> </LazyComponent>) )
+                    !isLoading && pokemons?.map(
+                        pokemon => (
+                            <LazyComponent key={ pokemon.name + pokemon.id } id={pokemon.id}>
+                                <PokemonCard key={ pokemon.id } {...pokemon } onOpen={setPickedPokemon} />
+                            </LazyComponent>
+                        )
+                    )
                 }
             </div>
         </>
-
     )
 }

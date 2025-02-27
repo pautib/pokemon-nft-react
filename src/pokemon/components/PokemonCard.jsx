@@ -10,6 +10,7 @@ export const PokemonCard = ({
       height,
       weight,
       imgUrl,
+      onOpen,
     }) => {
 
         const usedImg = imgUrl ? imgUrl : DEFAULT_CARD_IMG;
@@ -34,7 +35,9 @@ export const PokemonCard = ({
                                 <p className="card-text">
                                     <small className="text-muted"><b>Weight:</b> { weight / 10.0 } Kg</small>
                                 </p>
-                                <NavLink to={`${ BASE_URI }/pokemon/${ id }`}><b>More information</b></NavLink>
+                                <NavLink to={`${ BASE_URI }/pokemon/${ id }`} onClick={ () => onOpen(id) }>
+                                    <b className="pointer-events-none">More information</b>
+                                </NavLink>
                             </div>
                         </div>
                     </div>
@@ -48,5 +51,6 @@ PokemonCard.propTypes = {
     name: PropTypes.string,
     height: PropTypes.number,
     weight: PropTypes.number,
-    imgUrl: PropTypes.string
+    imgUrl: PropTypes.string,
+    onOpen: PropTypes.func
 };

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export const useCarouselCounter = (initialValue = 0, minValue = 0, maxValue) => {
+export const useCarouselCounter = (initialValue = 0, minValue = 0, maxValue = Infinity) => {
 
     const [counter, setCounter] = useState(initialValue);
 
