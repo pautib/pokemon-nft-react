@@ -15,7 +15,7 @@ export const LazyComponent = ( { children, loadingNode, id }) => {
       },
       { 
         //threshold: 0.1, 
-        rootMargin: "50%" 
+        rootMargin: "90%" 
       }
     );
 
