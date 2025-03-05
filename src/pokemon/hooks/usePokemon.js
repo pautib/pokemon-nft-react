@@ -1,15 +1,17 @@
+/* eslint-disable @tanstack/query/exhaustive-deps */
 import { getFilteredPokemonInfo, getPokemonById } from "../helpers";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const usePokemon = (pokemonId = 0) => {
+export const usePokemon = (pokemonId) => {
 
     const { isPending: isLoading, error, data: fetchedPokemon } = useQuery({
-        queryKey: ['pokemonDetails', pokemonId],
+        queryKey: ['pokemonDetails'],
         queryFn: () => getPokemonDetails(pokemonId),
-        staleTime: Infinity
+        staleTime: 0,
+
     });
 
-    const getPokemonDetails = async(pokemonId) => {
+    const getPokemonDetails = async() => {
         return getPokemonById(pokemonId).then((poke) => getFilteredPokemonInfo(poke));
     }
 
@@ -34,3 +36,8 @@ export const usePokemon = (pokemonId = 0) => {
     };
 
 }
+
+export const useGetFetchPokemon = () => {
+    const queryClient = useQueryClient();
+    return queryClient.getQueryData(['pokemonDetails']) ? queryClient.getQueryData(['pokemonDetails']) : {};
+};
