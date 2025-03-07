@@ -34,7 +34,7 @@ export const LazyComponent = ( { children, loadingNode, id }) => {
           { children }
         </Suspense>
       ) : (
-        <> { loadingNode} </>
+        <> { loadingNode } </>
       )}
     </div>
   );

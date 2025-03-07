@@ -1,5 +1,6 @@
 export * from './PokemonList.jsx'
 export * from './PokemonCard.jsx'
+export * from './PokemonCardEmpty.jsx'
 export * from './EVInputNumber.jsx'
 export * from './IVInputNumber.jsx'
 export * from './PokemonCarousel.jsx'

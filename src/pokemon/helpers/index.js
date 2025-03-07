@@ -5,3 +5,4 @@ export * from './getNatureArrayValues.js'
 export * from './getBase64EncodedImg.js'
 
 export const DEFAULT_CARD_IMG = "./whos.png";
+export const EMPTY_IMG = "./empty.png";
