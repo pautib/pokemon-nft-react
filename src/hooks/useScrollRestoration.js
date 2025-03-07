@@ -1,65 +1,64 @@
-import { useEffect, useRef } from 'react';
-
+import { useEffect, useRef, useCallback } from 'react';
+import { useGetFetchPokemon } from '../pokemon/hooks';
 
 const MAX_SCROLL_COUNTER = 20;
 // Custom hook to track the scroll position of the SearchPokemonPage
 export const useScrollRestoration = () => {
 
-  const isScrollFinished = useRef(false);
+  const isScrollLoading = useRef(false);
+  const hasUserScrolled = useRef(true);
+  const scrollCounter = useRef(0);
+  const { id: pickedPokemon } = useGetFetchPokemon();
+  
+  const scrollAndCheck = useCallback(() => {
+    console.log("Picked pokemon", pickedPokemon)
 
-  const setPickedPokemon = (pokemonId) => {
-    sessionStorage.setItem('pickedPokemon',pokemonId)
-  }
+    if (hasUserScrolled.current) {
+      isScrollLoading.current = false;
+      return;
+    }
+
+    if (!document.getElementById(pickedPokemon)) {
+      return;
+    }
+
+    let initFocusPosition = document.getElementById(pickedPokemon).offsetTop;
+    let newFocusPosition = window.scrollY;
+
+    if ( (initFocusPosition >= newFocusPosition + window.innerHeight / 2) && scrollCounter.current < MAX_SCROLL_COUNTER) {
+      scrollCounter.current = scrollCounter.current + 1;
+      window.scrollTo({ top: initFocusPosition, behavior: 'smooth', block: 'center'});
+      setTimeout(() => {
+          scrollAndCheck();
+      }, 1000);
+    } else {
+      isScrollLoading.current = false;
+    }
+
+  }, [hasUserScrolled, pickedPokemon, isScrollLoading]);
+
 
   useEffect(() => {
+    console.log("Inside the useEffect")
+    window.addEventListener('wheel', () => hasUserScrolled.current = true);
 
-    const pickedPokemon = sessionStorage.getItem('pickedPokemon')
-
-    let userScrolled = false;
-    let counter = 0;
-    
-    window.addEventListener('wheel', () => {
-      userScrolled = true;
-    });
-
-
-    function scrollAndCheck() {
-
-        if (userScrolled) { 
-          return; 
-        }
-        
-        let initFocusPosition = document.getElementById(pickedPokemon).offsetTop;
-        let newFocusPosition = window.scrollY;
-        console.log(initFocusPosition, newFocusPosition, window.innerHeight, counter);
-        
-        if ( (initFocusPosition >= newFocusPosition + window.innerHeight/2) && counter < MAX_SCROLL_COUNTER) {
-            
-            window.scrollTo({ top: initFocusPosition, behavior: 'smooth', block: 'center'});
-            //document.getElementById(pickedPokemon).scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
-            setTimeout(() => {
-                counter++;
-                scrollAndCheck(newFocusPosition);
-            }, 1000);
-
-        }
-
+    if (pickedPokemon) {
+      hasUserScrolled.current = false;
+      isScrollLoading.current = true;
     }
 
-    if (pickedPokemon && document.getElementById(pickedPokemon) && !isScrollFinished.current) {
-      scrollAndCheck();
-      isScrollFinished.current = true;
-    }
+    scrollAndCheck();
 
-    return () => window.removeEventListener('wheel', () => userScrolled = true )
+    return () => {
+      console.log("Inside the return useEffect")
+      window.removeEventListener('wheel', () => hasUserScrolled.current = true);
+    } 
 
-  }, []);
+  }, [scrollAndCheck, pickedPokemon]);
 
-  // Return the current scroll position
+
   return {
-    pickedPokemon: sessionStorage.getItem('pickedPokemon'),
-    setPickedPokemon,
-    isScrollFinished,
+    isScrollLoading: isScrollLoading.current,
   };
 
 };
