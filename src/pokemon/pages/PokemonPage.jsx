@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { capitalize } from "lodash";
-import { PokemonCarousel, PokemonCryButton, PokemonStatsCalculator, PokemonStatsChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
+import { PokemonCarousel, PokemonCryButton, PokemonRadarStatsComparator, PokemonRadarChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
 import { usePokemon } from "../hooks";
 
-
 export const PokemonPage = () => {
-
     // eslint-disable-next-line no-unused-vars
     const { pokemonId, ...rest } = useParams();
     const { isLoading, ...pokemon } = usePokemon(pokemonId);
@@ -34,7 +32,6 @@ export const PokemonPage = () => {
         }
     };
 
-
     return (
         isLoading ? (
             <PokeballSpinner/>
@@ -46,7 +43,7 @@ export const PokemonPage = () => {
 
                 <PokemonCarousel imageJson={ pokemon.sprites } onSelectImg={ onSelectCarouselImg }/>
 
-                <div className="col-xs-8 col-sm-8 col-md-8">
+                <div className="col-xs-5 col-sm-5 col-md-5">
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item"> <b>Id: </b> { pokemon.id } </li>
                         <li className="list-group-item"> <b>Name: </b> { capitalize(pokemon.name) } </li>
@@ -70,35 +67,38 @@ export const PokemonPage = () => {
                     <br/>
                 </div>
 
-            </div>
-
-            <div className="row mt-1">
-                <h3>Base stats</h3>
-                <div className="col-xs-6 col-sm-6 col-md-6">
-                    <PokemonStatsChart stats={
-                        [pokemon.baseHp,
-                        pokemon.baseAtk,
-                        pokemon.baseDef,
-                        pokemon.baseSpAtk,
-                        pokemon.baseSpDef,
-                        pokemon.baseSpeed] } >
-                    </PokemonStatsChart>
+                <div className="col-xs-4 col-sm-4 col-md-4">
+                    <PokemonRadarChart
+                        stats={{
+                            hp: pokemon.baseHp,
+                            atk: pokemon.baseAtk,
+                            def: pokemon.baseDef,
+                            speed: pokemon.baseSpeed,
+                            defSp: pokemon.baseSpDef,
+                            atkSp: pokemon.baseSpAtk
+                        }}
+                        chartName={ "Base Stats" }
+                        chartHeight={ 400 }
+                    />
                 </div>
+
             </div>
 
             <div className="row mt-1">
-                <h3>Stats Calculator</h3>
+                <h3>Stats Comparator</h3>
+
                 <div className="col-xs-12 col-sm-12 col-md-12">
-                    <PokemonStatsCalculator baseStats = {
-                        [pokemon.baseHp,
-                        pokemon.baseAtk,
-                        pokemon.baseDef,
-                        pokemon.baseSpAtk,
-                        pokemon.baseSpDef,
-                        pokemon.baseSpeed] }
+                    <PokemonRadarStatsComparator
+                        baseStats = {
+                            [pokemon.baseHp,
+                            pokemon.baseAtk,
+                            pokemon.baseDef,
+                            pokemon.baseSpAtk,
+                            pokemon.baseSpDef,
+                            pokemon.baseSpeed]
+                        }
                         name={pokemon.name}
-                    >
-                    </PokemonStatsCalculator>
+                    />
                 </div>
             </div>
 
