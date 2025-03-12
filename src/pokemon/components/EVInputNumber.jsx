@@ -53,6 +53,7 @@ export const EVInputNumber = ({ id, labelContent, value, addedMaxValue, onChange
                 className="form-control"
                 style={{ borderRadius: '10px !important', blockSize: '50%', maxWidth: '50%' }}
                 onChange={ (event) =>  {
+                    event.target.value = event.target.value || 0; // prevent NaN
                     if (event.target.value < value || addedMaxValue < maxSumEvValue) onChangeFunction(event);
                 }
             }

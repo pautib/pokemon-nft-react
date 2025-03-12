@@ -44,7 +44,10 @@ export const IVInputNumber = ({ id, labelContent, value, onChangeFunction }) => 
                 data-tooltip-content={ tooltipDescription.current }
                 className="form-control"
                 style={{ borderRadius: '10px !important', blockSize: '50%', maxWidth: '50%' }}
-                onChange={ onChangeFunction }
+                onChange={ (event) => {
+                    event.target.value = event.target.value || 0; // prevent NaN
+                    onChangeFunction(event);
+                } }
             />
         </div>
     );
