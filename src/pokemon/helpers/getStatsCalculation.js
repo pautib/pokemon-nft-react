@@ -1,3 +1,15 @@
+export const LVL_MIN_VALUE = 1;
+export const LVL_MAX_VALUE = 100;
+export const IV_MIN_VALUE = 0;
+export const IV_MAX_VALUE = 31;
+export const EV_MIN_VALUE = 0;
+export const EV_MAX_VALUE = 252;
+const NATURE_INCREASE_MULTIPLIER = 1.1;
+const IV_MAX_VALUE_ARRAY = [IV_MAX_VALUE, IV_MAX_VALUE, IV_MAX_VALUE, IV_MAX_VALUE, IV_MAX_VALUE, IV_MAX_VALUE];
+const EV_MAX_VALUE_ARRAY = [EV_MAX_VALUE, EV_MAX_VALUE, EV_MAX_VALUE, EV_MAX_VALUE, EV_MAX_VALUE, EV_MAX_VALUE];
+const NATURE_INCREASE_MULTIPLIER_ARRAY = [1, NATURE_INCREASE_MULTIPLIER, NATURE_INCREASE_MULTIPLIER, NATURE_INCREASE_MULTIPLIER, NATURE_INCREASE_MULTIPLIER, NATURE_INCREASE_MULTIPLIER];
+
+
 export const getStatsCalculation = (baseStatsArray, ivArray, evArray, level,  natureArray , pokemonName) => { // Make the corresponding HP exception for shedinja
 
     let newStats = [];
@@ -10,6 +22,11 @@ export const getStatsCalculation = (baseStatsArray, ivArray, evArray, level,  na
     newStats[5] = getOtherStatValue(baseStatsArray[5], ivArray[5], evArray[5], level, natureArray[5]); // Speed
 
     return newStats;
+}
+
+export const getMaxStatValue = (baseStatsArray) => {
+    let maxArrayValues = getStatsCalculation(baseStatsArray, IV_MAX_VALUE_ARRAY, EV_MAX_VALUE_ARRAY, LVL_MAX_VALUE, NATURE_INCREASE_MULTIPLIER_ARRAY, "");
+    return Math.max(...maxArrayValues);
 }
 
 const getHPValue = (baseStatHp, ivHp, evHp, level) => {

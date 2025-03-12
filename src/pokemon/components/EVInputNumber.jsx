@@ -1,16 +1,15 @@
 import PropTypes from "prop-types";
 import {useEffect, useRef} from "react";
 import { Tooltip } from "react-tooltip";
+import { EV_MIN_VALUE, EV_MAX_VALUE } from "../helpers/getStatsCalculation";
 
 export const EVInputNumber = ({ id, labelContent, value, addedMaxValue, onChangeFunction }) => {
 
-    const minValue = 0;
-    const maxValue = 252;
-    const maxSumEvValue = maxValue * 2 + 4;
+    const maxSumEvValue = EV_MAX_VALUE * 2 + 4;
 
     const tooltipId = 'tooltip_' + id;
-    const tooltipMaxValue = "Maximum value is " + maxValue;
-    const tooltipMinValue = "Minimum value is " + minValue;
+    const tooltipMaxValue = "Maximum value is " + EV_MAX_VALUE;
+    const tooltipMinValue = "Minimum value is " + EV_MIN_VALUE;
     const tooltipDescription = useRef("");
 
     const tooltipExceededEVSum = `The sum of EVs values cannot exceed ${maxSumEvValue}`;
@@ -19,11 +18,11 @@ export const EVInputNumber = ({ id, labelContent, value, addedMaxValue, onChange
 
         let newDescription = "";
 
-        if (value === maxValue) {
+        if (value === EV_MAX_VALUE) {
             newDescription = tooltipMaxValue;
         }
 
-        if (value === minValue) {
+        if (value === EV_MIN_VALUE) {
             newDescription = tooltipMinValue;
         }
 
@@ -41,10 +40,10 @@ export const EVInputNumber = ({ id, labelContent, value, addedMaxValue, onChange
             <label className="form-label" htmlFor={ id } style={{ padding: "5px" }}>{ labelContent }</label>
             <Tooltip id={ tooltipId } />
             <input
-                min={ minValue }
-                max={ maxValue}
+                min={ EV_MIN_VALUE }
+                max={ EV_MAX_VALUE }
                 value={ value }
-                placeholder={ minValue + "to" + maxValue }
+                placeholder={ EV_MIN_VALUE + " to " + EV_MAX_VALUE }
                 type="number"
                 id={ id }
                 data-tooltip-id={ tooltipId }

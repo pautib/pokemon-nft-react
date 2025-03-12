@@ -1,26 +1,24 @@
 import PropTypes from "prop-types";
 import {useEffect, useRef} from "react";
 import { Tooltip } from "react-tooltip";
+import { IV_MIN_VALUE, IV_MAX_VALUE } from "../helpers/getStatsCalculation";
 
 export const IVInputNumber = ({ id, labelContent, value, onChangeFunction }) => {
 
-    const minValue = 0;
-    const maxValue = 31;
-
     const tooltipId = 'tooltip_' + id;
-    const tooltipMaxValue = "Maximum value is " + maxValue;
-    const tooltipMinValue = "Minimum value is " + minValue;
+    const tooltipMaxValue = "Maximum value is " + IV_MAX_VALUE;
+    const tooltipMinValue = "Minimum value is " + IV_MIN_VALUE;
     const tooltipDescription = useRef("");
 
     useEffect(() => {
 
         let newDescription = "";
 
-        if (value === maxValue) {
+        if (value === IV_MAX_VALUE) {
             newDescription = tooltipMaxValue;
         }
 
-        if (value === minValue) {
+        if (value === IV_MIN_VALUE) {
             newDescription = tooltipMinValue;
         }
 
@@ -33,10 +31,10 @@ export const IVInputNumber = ({ id, labelContent, value, onChangeFunction }) => 
             <label className="form-label" htmlFor={ id } style={{ padding: "5px" }}>{ labelContent }</label>
             <Tooltip id={ tooltipId } />
             <input
-                min={ minValue }
-                max={ maxValue}
+                min={ IV_MIN_VALUE }
+                max={ IV_MAX_VALUE}
                 value={ value }
-                placeholder={ minValue + "to" + maxValue }
+                placeholder={ IV_MIN_VALUE + " to " + IV_MAX_VALUE }
                 type="number"
                 id={ id }
                 data-tooltip-id={ tooltipId }
