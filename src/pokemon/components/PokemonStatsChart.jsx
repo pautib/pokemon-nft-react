@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {BarChart} from "@mui/x-charts";
 import {Box } from '@mui/material';
 
-export const PokemonStatsChart = ({stats}) => {
+export const PokemonStatsChart = ({stats, maxValue = 500}) => {
 
     const chartSetting = {
         width: 500,
@@ -38,13 +38,14 @@ export const PokemonStatsChart = ({stats}) => {
     ];
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%'}}>
             <BarChart
                 dataset={dataset}
-                xAxis={[{min: 0, max: 550}]}
+                xAxis={[{min: 0, max: maxValue}]}
                 yAxis={[{ scaleType: 'band', dataKey: 'statName' }]}
                 series={[{ dataKey: 'stat' , color: '#f2c304'}]}
                 layout="horizontal"
+                
                 {...chartSetting}
                 slotProps={{
                     loadingOverlay: { message: 'Data should be available soon.' },
@@ -60,5 +61,6 @@ export const PokemonStatsChart = ({stats}) => {
 };
 
 PokemonStatsChart.propTypes = {
-    stats: PropTypes.array
+    stats: PropTypes.array,
+    maxValue: PropTypes.number,
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { capitalize } from "lodash";
-import { PokemonCarousel, PokemonCryButton, PokemonRadarStatsComparator, PokemonRadarChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
+import { PokemonCarousel, PokemonCryButton, PokemonStatsComparator, PokemonRadarChart, PokeballSpinner, PokemonTypeImage, PokemonNFTCreationForm } from "../components";
 import { usePokemon } from "../hooks";
 
 export const PokemonPage = () => {
@@ -88,7 +88,7 @@ export const PokemonPage = () => {
                 <h3>Stats Comparator</h3>
 
                 <div className="col-xs-12 col-sm-12 col-md-12">
-                    <PokemonRadarStatsComparator
+                    <PokemonStatsComparator
                         baseStats = {
                             [pokemon.baseHp,
                             pokemon.baseAtk,

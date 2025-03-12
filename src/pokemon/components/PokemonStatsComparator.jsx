@@ -24,7 +24,7 @@ const lvlMarks = [
     },
 ];
 
-export const PokemonRadarStatsComparator = ({ baseStats, pokemonName }) => {
+export const PokemonStatsComparator = ({ baseStats, pokemonName }) => {
 
     const { natures, selectedNature, setSelectedNature } = usePokemonNatures([]);
     const [lvl, setLvl] = useState(50);
@@ -221,7 +221,7 @@ export const PokemonRadarStatsComparator = ({ baseStats, pokemonName }) => {
 };
 
 
-PokemonRadarStatsComparator.propTypes = {
+PokemonStatsComparator.propTypes = {
     baseStats: PropTypes.array,
     pokemonName: PropTypes.string,
     natures: PropTypes.object,
