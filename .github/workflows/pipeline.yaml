@@ -33,6 +33,9 @@ jobs:
 
     steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
