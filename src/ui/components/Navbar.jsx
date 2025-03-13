@@ -13,7 +13,13 @@ export const Navbar = ({baseUri}) => {
                 className="navbar-brand"
                 to={baseUri}
             >
-                <img src="./Pokemon.svg.png" alt="Pokemon" className="img-thumbnail" style={{backgroundColor: "#aa0d18", borderColor: "black" }}/>
+                <img 
+                    src="./Pokemon.svg.png" 
+                    alt="Pokemon" 
+                    className="img-thumbnail" 
+                    style={{backgroundColor: "#aa0d18", borderColor: "black" }}
+                    title='Pokemon and Pokemon character names are trademarks of Nintendo'
+                />
             </Link>
 
             <div className="navbar-collapse">
