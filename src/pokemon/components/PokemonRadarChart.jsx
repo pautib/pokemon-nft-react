@@ -1,8 +1,12 @@
 import { PropTypes } from "prop-types";
 import Chart from "react-apexcharts";
+import { useRef } from "react";
 
-export const PokemonRadarChart = ({ stats, chartHeight, chartName, showTitle = true, maxStatValue }) => {
+export const PokemonRadarChart = ({ stats, chartHeight, chartName, showTitle = true }) => {
     
+    const maxStatValue = useRef(Math.max(...Object.values(stats)));
+    const STEP_SIZE = 20;
+
     const state = {
         series: [{
             name: chartName || 'Stats',
@@ -28,10 +32,10 @@ export const PokemonRadarChart = ({ stats, chartHeight, chartName, showTitle = t
             }
           },
           yaxis: {
-            stepSize: 20,
+            stepSize: STEP_SIZE,
             show: false,
             min: 0,
-            max: maxStatValue || 100
+            max: maxStatValue.current + STEP_SIZE || 100
           },
           xaxis: {
             categories: ['Hp', 'Atk', 'Def', 'Speed', 'DefSp', 'AtkSp']
@@ -62,7 +66,7 @@ export const PokemonRadarChart = ({ stats, chartHeight, chartName, showTitle = t
     return (
       <div>
         <div id="chart">
-            <Chart options={state.options} series={state.series} type="radar" height={ chartHeight } />
+            <Chart options={state.options} series={state.series} type="radar" height={ chartHeight }  />
         </div>
         <div id="html-dist"></div>
       </div>
@@ -73,6 +77,5 @@ PokemonRadarChart.propTypes = {
     stats: PropTypes.object,
     chartHeight: PropTypes.number,
     chartName: PropTypes.string,
-    showTitle: PropTypes.bool,
-    maxStatValue: PropTypes.number
+    showTitle: PropTypes.bool
 };
