@@ -22,3 +22,9 @@ jobs:
 
       - name: Check style
         run: npm run lint
+
+      - name: Build the app for production
+        run: npm run predeploy
+      
+      -name: Deploy to Github Pages
+        run: npm run deploy
