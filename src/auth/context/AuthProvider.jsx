@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {AuthContext} from "./AuthContext.jsx";
 import {useReducer} from "react";
 import {authReducer} from "./authReducer.js";
@@ -41,3 +42,7 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+
+AuthProvider.propTypes = { 
+    children: PropTypes.node.isRequired
+};

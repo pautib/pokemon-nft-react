@@ -30,7 +30,7 @@ export const useScrollRestoration2 = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         }
 
-    }, []);
+    }, [queryClient]);
 
     return {
         savedPosition: queryClient.getQueryData('scrollPosition'),
