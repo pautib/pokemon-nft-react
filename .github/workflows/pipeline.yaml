@@ -57,7 +57,8 @@ jobs:
     needs: build_pipeline
 
     environment:
-    name: github-pages
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
 
