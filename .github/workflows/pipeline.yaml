@@ -74,8 +74,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js version
         uses: actions/setup-node@v4
@@ -84,7 +82,5 @@ jobs:
 
       - name: Bump version
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@users.noreply.github.com'
           npm version patch -m "ci: bump version to %s"
           git push origin HEAD --tags
