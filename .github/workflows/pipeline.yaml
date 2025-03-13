@@ -82,5 +82,7 @@ jobs:
 
       - name: Bump version
         run: |
+          git config --global user.name 'pautib'
+          git config --global user.email 'entimos34@gmail.com'
           npm version patch -m "ci: bump version to %s"
           git push origin HEAD --tags
