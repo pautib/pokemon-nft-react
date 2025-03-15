@@ -1,7 +1,7 @@
 {
   "name": "pokemon-nft-react",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://pautib.github.io/pokemon-nft-react",
   "type": "module",
   "scripts": {
