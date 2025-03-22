@@ -1,3 +1,5 @@
+[![Health check](https://github.com/pautib/pokemon-nft-react/actions/workflows/health-check-ping.yaml/badge.svg)](https://github.com/pautib/pokemon-nft-react/actions/workflows/health-check-ping.yaml)
+
 # 🚀 Pokemon NFT React 🚀
 
 Welcome to **Pokémon NFT React!** 🎉 This project brings together the nostalgia of Pokémon with the cutting-edge world of **NFTs** (Non-Fungible Tokens), powered by **React**. Gotta catch 'em all, right? 😉
