@@ -16,7 +16,6 @@ permissions:
 jobs:
   version_bump:
     runs-on: ubuntu-latest
-    needs: deployment
 
     steps:
       - name: Checkout code
