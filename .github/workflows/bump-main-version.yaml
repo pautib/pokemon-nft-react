@@ -5,7 +5,7 @@ on:
     workflows: ['Release and deploy master']
     types: [completed]
     branches:
-      - 'main' # Trigger this workflow on the main branch
+      - main # Trigger this workflow on the main branch
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

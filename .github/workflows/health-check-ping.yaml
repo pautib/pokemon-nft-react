@@ -5,7 +5,7 @@ on:
     workflows: ['Release and deploy master']
     types: [completed]
     branches:
-      - 'master' # It does not matter in this case
+      - master # It does not matter in this case
 
 jobs:
   check_health:
