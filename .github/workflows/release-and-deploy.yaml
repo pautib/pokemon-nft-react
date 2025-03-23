@@ -1,11 +1,11 @@
 name: Release and deploy master
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-    types: [synchronize]
+  #push:
+  #  branches: [master]
+  #pull_request:
+  #  branches: [master]
+  #  types: [synchronize]
   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

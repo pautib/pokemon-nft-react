@@ -1,11 +1,13 @@
 name: Health check
 
 on:
-  workflow_run:
-    workflows: ['Release and deploy master']
-    types: [completed]
-    branches: [master] # It does not matter in this case
-    conclusions: [success]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  #workflow_run:
+  #  workflows: ['Release and deploy master']
+  #  types: [completed]
+  #  branches: [master] # It does not matter in this case
+  #  conclusions: [success]
 
 jobs:
   check_health:
