@@ -2,11 +2,9 @@ name: Release and deploy master
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
     types: [synchronize]
   
   # Allows you to run this workflow manually from the Actions tab
@@ -49,6 +47,9 @@ jobs:
       - name: Build the app for production
         run: npm run predeploy
 
+      - name: List build directory
+        run: ls -R ${{ github.workspace }}/dist
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -56,8 +57,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: dist
-          path: ./dist
+          name: github-pages
+          path: ${{ github.workspace }}/dist
       
       - name: Deploy to Github Pages
         id: deployment

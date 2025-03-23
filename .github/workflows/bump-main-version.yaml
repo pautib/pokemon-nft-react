@@ -4,8 +4,7 @@ on:
   workflow_run:
     workflows: ['Release and deploy master']
     types: [completed]
-    branches:
-      - master
+    branches: [master]
     conclusions: [success]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
