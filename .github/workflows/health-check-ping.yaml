@@ -14,7 +14,7 @@ jobs:
     steps:
 
       - name: Wait for a while
-        run: sleep 120 # Delay for 2 minutes
+        run: sleep 60 # Delay for 2 minutes
 
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v4
