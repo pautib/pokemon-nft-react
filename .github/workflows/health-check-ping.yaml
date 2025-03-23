@@ -6,6 +6,7 @@ on:
     types: [completed]
     branches:
       - master # It does not matter in this case
+    conclusions: [success]
 
 jobs:
   check_health:
