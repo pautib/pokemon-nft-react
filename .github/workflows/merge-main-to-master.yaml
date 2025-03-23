@@ -4,8 +4,7 @@ on:
   workflow_run:
     workflows: ['Build main branch'] # Name of the previous workflow
     types: [completed]
-    branches:
-      - main
+    branches: [main]
     conclusions: [success]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages

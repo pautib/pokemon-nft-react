@@ -4,8 +4,7 @@ on:
   workflow_run:
     workflows: ['Release and deploy master']
     types: [completed]
-    branches:
-      - master # It does not matter in this case
+    branches: [master] # It does not matter in this case
     conclusions: [success]
 
 jobs:
