@@ -48,7 +48,7 @@ jobs:
       - name: Check linting
         run: npm run lint
 
-  build:
+  build_main:
     runs-on: ubuntu-latest
 
     steps:
@@ -71,7 +71,7 @@ jobs:
 
   merge_main_into_master:
     runs-on: ubuntu-latest
-    needs: [lint, build]
+    needs: [lint, build_main]
 
     steps:
       - name: Checkout code
@@ -93,7 +93,7 @@ jobs:
           git merge origin/main --no-edit
           git push origin master
   
-  build_release_deploy_master:
+  release_master:
     runs-on: ubuntu-latest
     needs: [merge_main_into_master]
 
@@ -131,6 +131,26 @@ jobs:
         with:
           name: github-pages
           path: ${{ github.workspace }}/dist
+  
+  deploy_master:
+    runs-on: ubuntu-latest
+    needs: [release_master]
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: github-pages
+          path: ${{ github.workspace }}/dist
       
       - name: Deploy to Github Pages
         id: deployment
@@ -138,7 +158,7 @@ jobs:
 
   check_health:
     runs-on: ubuntu-latest
-    needs: [build_release_deploy_master]
+    needs: [deploy_master]
 
     steps:
 
@@ -161,7 +181,7 @@ jobs:
 
   version_bump:
     runs-on: ubuntu-latest
-    needs: [build_release_deploy_master]
+    needs: [deploy_master]
 
     steps:
       - name: Checkout code
