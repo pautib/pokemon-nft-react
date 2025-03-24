@@ -26,10 +26,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-branding:
-  icon: 'truck'
-  color: 'green'
-
 jobs:
   lint:
     runs-on: ubuntu-latest
