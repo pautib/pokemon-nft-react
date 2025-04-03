@@ -1,0 +1,58 @@
+name: On pull requests
+
+on:
+  pull_request:
+    types: [opened,edited,reopened]
+
+
+permissions:
+  pull-requests: write
+
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.0'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check linting
+        run: npm run lint
+
+  build_main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.4.0'
+
+      - name: Install dependencies 
+        run: npm ci
+
+      - name: Build the app
+        run: npm run build
