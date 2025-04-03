@@ -14,5 +14,14 @@ export default defineConfig({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
-  }
+  },
+  preview: {
+    port: 5173,
+    strictPort: true,
+  },
+  server: {
+    port: 5173,
+    strictPort: true,
+    host: true
+  },
 })
