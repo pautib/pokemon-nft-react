@@ -4945,6 +4945,11 @@ react-transition-group@^4.4.5:
   dependencies:
     loose-envify "^1.1.0"
 
+reactjs-flip-card@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/reactjs-flip-card/-/reactjs-flip-card-2.0.3.tgz"
+  integrity sha512-kVdt7O1EnfKhVTEZaeLigN/KnX/XPtOYmheBHw7c0kdNUg/p+ltmztmmSXVv55vRttZKP9KqzyFn/ILlg9DbEw==
+
 reflect.getprototypeof@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/reflect.getprototypeof/-/reflect.getprototypeof-1.0.4.tgz"

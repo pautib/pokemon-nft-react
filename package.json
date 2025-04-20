@@ -1,7 +1,7 @@
 {
   "name": "pokemon-nft-react",
   "private": false,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "homepage": "https://pautib.github.io/pokemon-nft-react",
   "type": "module",
   "scripts": {
@@ -21,7 +21,8 @@
     "react": "^18.2.0",
     "react-apexcharts": "^1.7.0",
     "react-dom": "^18.2.0",
-    "react-router": "^7.1.5"
+    "react-router": "^7.1.5",
+    "reactjs-flip-card": "^2.0.3"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",

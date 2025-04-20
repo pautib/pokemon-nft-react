@@ -41,13 +41,6 @@ export const Navbar = ({baseUri}) => {
 
                     <NavLink
                         className="nav-item nav-link pokeNavSection"
-                        to={baseUri + "/objects"}
-                    >
-                        Objects
-                    </NavLink>
-
-                    <NavLink
-                        className="nav-item nav-link pokeNavSection"
                         to={baseUri + "/wallet-test"}
                     >
                         Wallet

@@ -1,10 +1,10 @@
 import { useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import { Slider } from '@mui/material';
-import { getStatsCalculation } from "../helpers/getStatsCalculation.js";
+import { getStatsCalculation } from "../helpers";
 import { PokemonStatsChart } from "./PokemonStatsChart.jsx";
 import { PokeNatureButtonGroup } from "./PokeNatureButtonGroup.jsx";
-import {usePokemonNatures} from "../hooks/usePokemonNatures.js";
+import {usePokemonNatures} from "../hooks";
 import {IVInputNumber} from "./IVInputNumber.jsx";
 import {EVInputNumber} from "./EVInputNumber.jsx";
 

@@ -72,3 +72,21 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.nft-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the card and button horizontally */
+    gap: 1rem; /* Add space between the card and the button */
+
+}
+
+.nft-card {
+    width: 100%; /* Ensure the card takes up the full width of its container */
+    height: fit-content;
+    padding: 1rem;
+}
+
+.nft-button-container {
+    text-align: center; /* Center the button */
+}
