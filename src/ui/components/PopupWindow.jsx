@@ -9,7 +9,7 @@ import { styled } from '@mui/system';
  * @param {} 
  * @returns 
  */
-export const PopupWindow = ({ open, onClose = () => {}, title = "", children, style }) => { // https://mui.com/toolpad/core/react-use-dialogs/#api
+export const PopupWindow = ({ open, onClose = () => {}, children, title = "", style }) => { // https://mui.com/toolpad/core/react-use-dialogs/#api
 
   style.buttonClassName ??= '';
   style.buttonId ??= 'button-window';
@@ -33,8 +33,8 @@ PopupWindow.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
   style: PropTypes.object,
-  children: PropTypes.any.isRequired,
   title: PropTypes.string,
+  children: PropTypes.node
 };
 
 
