@@ -18,7 +18,7 @@ export const usePokemon = (pokemonId) => {
     return {
         isLoading,
         error,
-        id: fetchedPokemon?.id,
+        pokedexId: fetchedPokemon?.id,
         type1: fetchedPokemon?.types.filter((thisType) => thisType.slot === 1)[0].type.name,
         type2: fetchedPokemon?.types.filter((thisType) => thisType.slot === 2)[0]?.type.name,
         name: fetchedPokemon?.name,

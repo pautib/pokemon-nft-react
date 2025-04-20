@@ -45,7 +45,7 @@ export const PokemonPage = () => {
 
                 <div className="col-xs-5 col-sm-5 col-md-5">
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item"> <b>Id: </b> { pokemon.id } </li>
+                        <li className="list-group-item"> <b>Id: </b> { pokemon.pokedexId } </li>
                         <li className="list-group-item"> <b>Name: </b> { capitalize(pokemon.name) } </li>
                         <li className="list-group-item"> <b>Height: </b> { pokemon.height * 10 } cm</li>
                         <li className="list-group-item"> <b>Weight: </b> { pokemon.weight / 10 } Kg</li>
