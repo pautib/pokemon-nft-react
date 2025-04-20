@@ -16,11 +16,6 @@ export const PokemonNftCard = ({
         const [stats, setStats] = useState([]);
         const { releasePokemonNFT } = usePokemonSmartContract();
 
-        useEffect(() => { 
-            console.log("PokemonNftCard", pokemon);
-            console.log("PokemonNftCard", stats);
-        }, [pokemon, stats]);
-
         useEffect(() => {
 
             if (!pokemon) return;
@@ -30,8 +25,7 @@ export const PokemonNftCard = ({
             let ivArray = [pokemon?.ivHp, pokemon?.ivAtk, pokemon?.ivDef, pokemon?.ivSpAtk, pokemon?.ivSpDef, pokemon?.ivSpeed];
             let evArray = [pokemon?.evHp, pokemon?.evAtk, pokemon?.evDef, pokemon?.evSpAtk, pokemon?.evSpDef, pokemon?.evSpeed];
             let baseStats = [pokemon?.baseHp, pokemon?.baseAtk, pokemon?.baseDef, pokemon?.baseSpAtk, pokemon?.baseSpDef, pokemon?.baseSpeed];
-            console.log("all natures", natures );
-            console.log("nature", natures[pokemon.natureIndex][1].matrix, );
+
             setStats(
                 getStatsCalculation(baseStats, ivArray, evArray, lvl, natures[pokemon.natureIndex][1].matrix, pokemon?.name)
             );

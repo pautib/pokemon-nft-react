@@ -6,9 +6,7 @@ export const useCounter = (initialValue = 0, minValue = 0, maxValue = Infinity) 
 
     const countIncrement = () => {
         if (counter < maxValue) {
-            console.log("Inside increment")
             setCounter(counter + 1);
-            console.log(counter)
         }
     }
 

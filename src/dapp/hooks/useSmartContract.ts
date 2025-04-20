@@ -25,7 +25,7 @@ export const useSmartContract = <T extends Contract | BaseContract | ContractInt
             await contract.waitForDeployment();
             return true;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             return false;
         }
     };
