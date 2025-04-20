@@ -186,7 +186,7 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
 
 
   const getPokemons = async() => {
-    console.log("Getting pokemons...", pokemonContract);
+
     if (!pokemonContract) {
       setContractError("Contract not available");
       console.error("Contract not available");
@@ -194,9 +194,7 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
     }
 
     try {
-      console.log("before getting ids")
       const ids = await pokemonContract.getPokemonsByTrainer();
-      console.log("Pokemon IDs:", ids);
   
       // Fetch details for each Pokémon and map them into structured objects
       const pokemons: PokemonNFT[] = await Promise.all(
@@ -206,12 +204,10 @@ export const usePokemonSmartContract = (/*pokemonContractAddress: string, pokemo
           const jsonBody: PokemonNFT = await metadataResponse.json();
 
           // Map the data into your application's object structure
-          console.log(jsonBody);
           return jsonBody;
         })
       );
 
-      console.log("Mapped Pokemons:", pokemons);
       return pokemons;
 
     } catch (error: any) {

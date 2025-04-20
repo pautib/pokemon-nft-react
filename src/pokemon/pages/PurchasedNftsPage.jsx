@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { usePokemonSmartContract } from "../../dapp/hooks";
 import { PokeballSpinner, PokemonNftCard } from "../components";
 
@@ -6,8 +5,6 @@ import { PokeballSpinner, PokemonNftCard } from "../components";
 export const PurchasedNftsPage = () => {
 
     const { pokemonNFTs, isLoadingPokemons, contractQueryError, isContractLoaded} = usePokemonSmartContract();
-
-    useEffect(() => console.log(pokemonNFTs), [pokemonNFTs]);
 
     return (
         <>
