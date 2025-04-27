@@ -2,7 +2,7 @@
 
 # 🚀 Pokemon NFT React 🚀
 
-https://pautib.github.io/pokemon-nft-react/search
+https://pautib.github.io/pokemon-nft-react
 
 Welcome to **Pokémon NFT React!** 🎉 This project brings together the nostalgia of Pokémon with the cutting-edge world of **NFTs** (Non-Fungible Tokens), powered by **React**. Gotta catch 'em all, right? 😉
 
