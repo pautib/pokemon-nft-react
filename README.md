@@ -2,19 +2,21 @@
 
 # 🚀 Pokemon NFT React 🚀
 
+https://pautib.github.io/pokemon-nft-react
+
 Welcome to **Pokémon NFT React!** 🎉 This project brings together the nostalgia of Pokémon with the cutting-edge world of **NFTs** (Non-Fungible Tokens), powered by **React**. Gotta catch 'em all, right? 😉
 
 ## 🚀 Features
 
 - **Create Pokemon NFTs**: Use your wallet to mint unique Pokemon NFTs.
-- **Pokemon Carousel**: Browse through a carousel of Pokemon sprites.
+- **Pokemon Carousel**: Browse through a carousel of Pokémon sprites.
 - **Wallet Integration**: Seamlessly connect and interact with your crypto wallet.
 
 ## 🌟 Overview
 
 **Pokémon NFT React** allows users to explore and collect unique Pokémon represented as NFTs. Each Pokémon is a one-of-a-kind token on the blockchain, featuring exclusive attributes and traits.
 
-This project is designed as a learning experience, combining web3 technologies with React to create an interactive and visually appealing application.
+This project is designed as a learning experience. It combines Web3 technologies with React to create an interactive and visually appealing application.
 
 ## 🎯 Key Features
 
